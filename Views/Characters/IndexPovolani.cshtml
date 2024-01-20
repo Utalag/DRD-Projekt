@@ -1,0 +1,93 @@
+﻿@using System.Runtime.Intrinsics.X86
+@model IEnumerable<DnDV4.Models.Profession>
+
+@{
+    ViewData["Title"] = "Vyber Povolání";
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mana)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HpBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Strength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Agility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Constitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intelligence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charisma)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+          
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mana)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HpBonus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Strength) - @Html.DisplayFor(modelItem => item.Strength_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agility) - @Html.DisplayFor(modelItem => item.Agility_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Constitution) - @Html.DisplayFor(modelItem => item.Constitution_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Intelligence) - @Html.DisplayFor(modelItem => item.Intelligence_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Charisma) - @Html.DisplayFor(modelItem => item.Charisma_Max)
+                </td>
+                <td>
+                    <a asp-action="Create" asp-route-idProfession="@item.Id" asp-route-idRace="@ViewBag.idRasy">Vyber jen id</a>
+
+                    <!-- asp-all-route-data = vstupni data musí být slovnik-->
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="IndexRasy">Zpět</a>

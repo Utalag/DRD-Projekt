@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DnDV4.Models.Character>
+
+@{
+    ViewData["Title"] = "Seznam vytvořených postav";
+}
+
+<a type="button" asp-action="IndexRasy" class="btn btn-primary">Vytvoř novou posatvu</a>
+
+<!--<img class="card-img-top" src="~/images/seznamras.jpg" />-->
+    <div class="row" >
+    @foreach (var item in Model) {
+
+
+        <div class="col-sm-4" >
+            <div class="card" >
+                <div class="card-body ">
+                    <h4 class="card-title"> @Html.DisplayFor(modelItem => item.Race.RaceName) @Html.DisplayFor(modelItem => item.CharacterName)</h4>
+                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Profession.Name)</h5>
+
+                    <a asp-action="Denik" asp-route-id="@item.Id">
+                        <img width="50%" src="~/images/seznamras.jpg" />
+                    </a>
+
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Strength_current)      : @Html.DisplayFor(modelItem => item.Strength_current)      (@Html.DisplayFor(modelItem => item.Strength_bonus))</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Agility_current)       : @Html.DisplayFor(modelItem => item.Agility_current)       (@Html.DisplayFor(modelItem => item.Agility_bonus))</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Constitution_current)  : @Html.DisplayFor(modelItem => item.Constitution_current)  (@Html.DisplayFor(modelItem => item.Constitution_bonus))</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Intelligence_current)  : @Html.DisplayFor(modelItem => item.Intelligence_current)  (@Html.DisplayFor(modelItem => item.Intelligence_bonus))</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.Charisma_current)      : @Html.DisplayFor(modelItem => item.Charisma_current)      (@Html.DisplayFor(modelItem => item.Charisma_bonus))</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.CharacterLevel)        : @Html.DisplayFor(modelItem => item.CharacterLevel) </p>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.CharacterOrigin)</p>
+
+                    <p>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+
+

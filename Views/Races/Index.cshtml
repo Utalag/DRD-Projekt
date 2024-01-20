@@ -1,0 +1,102 @@
+﻿@model IEnumerable<DnDV4.Models.Race>
+
+@{
+    ViewData["Title"] = "Seznam Ras";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+
+@foreach (var item in Model) {
+
+        <div class="container-fluid bg-light">
+        <div class="row ">
+
+            <div class="col-2 bg-warning text-center">
+                    <div>
+                        @Html.DisplayFor(modelItem => item.RaceName)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.RaceSize)
+                    </div>
+                </div>
+
+            <div class="col-2 bg-warning text-center ">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Strength)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Strength) -
+                        @Html.DisplayFor(modelItem => item.Strength_Max)
+                        (@Html.DisplayFor(modelItem => item.Strength_Corection))
+                    </div>
+                </div>
+
+            <div class="col-2 bg-warning  text-center">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Agility)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Agility) -
+                        @Html.DisplayFor(modelItem => item.Agility_Max)
+                        (@Html.DisplayFor(modelItem => item.Agility_Corection))
+                    </div>
+                </div>
+
+                <div class="col-2 bg-warning ">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Constitution)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Constitution) -
+                        @Html.DisplayFor(modelItem => item.Constitution_Max)
+                        (@Html.DisplayFor(modelItem => item.Constitution_Corection))
+                    </div>
+                </div>
+
+                <div class="col-2 bg-warning ">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Intelligence)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Intelligence) -
+                        @Html.DisplayFor(modelItem => item.Intelligence_Max)
+                        (@Html.DisplayFor(modelItem => item.Intelligence_Correction))
+                    </div>
+                </div>
+
+                <div class="col-2 bg-warning ">
+                    <div>
+                        @Html.DisplayNameFor(model => model.Charisma)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Charisma) -
+                        @Html.DisplayFor(modelItem => item.Charisma_Max)
+                        (@Html.DisplayFor(modelItem => item.Charisma_Correction))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-4 ">
+                <div>
+                    <a asp-action="Edit" asp-route-id="@item.Id" calss="btn-secondary" >Edit</a>
+                </div>
+            </div>
+
+            <div class="col-4  ">
+                <div>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </div>
+            </div>
+
+            <div class="col-4  ">
+                <div>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+}

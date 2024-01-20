@@ -1,0 +1,123 @@
+﻿@model DnDV4.Models.Race
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h1>Popis rasy</h1>
+
+
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-6 bg-warning ">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.RaceName) :  @Html.DisplayFor(model => model.RaceName)
+            </div>
+        </div>
+        <div class="col-6 bg-warning">
+            <div class="form-group">
+                Zvláštní schopnosti: @Html.DisplayFor(model => model.SpecialAbilities)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid bg-light">
+
+    <div class="row">
+        <div class="col-12 bg-warning">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.RaceDescription) : @Html.DisplayFor(model => model.RaceDescription)
+            </div>
+        </div>
+
+
+        <!--Sila-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Strength)
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Strength)-@Html.DisplayFor(model => model.Strength_Max) (@Html.DisplayFor(model => model.Strength_Corection))
+            </div>
+            <div class="form-group">
+                Hod:@Html.DisplayFor(model => model.Strength_DiceRoll)k6
+            </div>
+        </div>
+
+        <!--Obratnost-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Agility)
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Agility)-@Html.DisplayFor(model => model.Agility_Max) (@Html.DisplayFor(model => model.Strength_Corection))
+            </div>
+            <div class="form-group">
+                Hod:@Html.DisplayFor(model => model.Dexterity_DiceRoll)k6
+            </div>
+        </div>
+
+        <!--Odolnost-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Constitution)
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Constitution)-@Html.DisplayFor(model => model.Constitution_Max) (@Html.DisplayFor(model => model.Agility_Corection))
+            </div>
+            <div class="form-group">
+                Hod:@Html.DisplayFor(model => model.Constitution_DiceRoll)k6
+            </div>
+        </div>
+
+        <!--Inteligence-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Intelligence)
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Intelligence)-@Html.DisplayFor(model => model.Intelligence_Max) (@Html.DisplayFor(model => model.Constitution_Corection))
+            </div>
+            <div class="form-group">
+                Hod:@Html.DisplayFor(model => model.Intelligence_DiceRoll)k6
+            </div>
+        </div>
+
+        <!--Charisma-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Charisma)
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Charisma)-@Html.DisplayFor(model => model.Charisma_Max) (@Html.DisplayFor(model => model.Intelligence_Correction))
+            </div>
+            <div class="form-group">
+                Hod:@Html.DisplayFor(model => model.Charisma_DiceRoll)k6
+            </div>
+        </div>
+
+        <!--ostatní-->
+        <div class="col-2 bg-warning">
+            <div class="col-sm-2">
+                Velikost: @Html.DisplayFor(model => model.RaceSize)
+            </div>
+            <div class="form-group">
+                Pohyblivost: @Html.DisplayFor(model => model.Mobility)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Smazat" class="btn btn-danger" /> 
+
+    <a asp-action="Index" class="btn btn-secondary">Zpět</a>
+    </form>
+</div>

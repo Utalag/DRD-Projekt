@@ -1,0 +1,111 @@
+﻿@model DnDV4.Models.Character
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="CharacterName" class="control-label"></label>
+                <input asp-for="CharacterName" class="form-control" />
+                <span asp-validation-for="CharacterName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CharacterOrigin" class="control-label"></label>
+                <input asp-for="CharacterOrigin" class="form-control" />
+                <span asp-validation-for="CharacterOrigin" class="text-danger"></span>
+            </div>
+  
+            <div class="form-group">
+                <label asp-for="RaceId" class="control-label"></label>
+                <input  asp-for="RaceId" class="form-control" value="@ViewBag.RaceId" hidden/>
+                <p class="form-control">@ViewBag.Race</p>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProfessionId" class="control-label"></label>
+                <input asp-for="ProfessionId" class="form-control" value="@ViewBag.ProfessionId" hidden/>
+                <p class="form-control">@ViewBag.Profession</p>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="CharacterLevel" class="control-label"></label>
+                <input asp-for="CharacterLevel" class="form-control" />
+            </div>
+
+            <div slider="slider" class="form-group">
+                <label asp-for="Strength_current" class="control-label"></label>
+                <input asp-for="Strength_current" type="range" min="@ViewBag.Sila" max="@ViewBag.SilaMax" sliderinput="" />
+                <output slideroutput=""></output>
+            </div>
+
+            <div slider="slider" class="form-group">
+                <label asp-for="Agility_current" class="control-label"></label>
+                <input asp-for="Agility_current" type="range" min="@ViewBag.Obratnost" max="@ViewBag.ObratnostMax" sliderinput="" />
+                <output slideroutput=""></output> 
+            </div>
+
+            <div slider="slider" class="form-group">
+                <label asp-for="Constitution_current" class="control-label"></label>
+                <input asp-for="Constitution_current" type="range" min="@ViewBag.Odolnost" max="@ViewBag.OdolnostMax" sliderinput="" />
+                <output slideroutput=""></output>
+            </div>
+
+            <div slider="slider" class="form-group">
+                <label asp-for="Intelligence_current" class="control-label"></label>
+                <input asp-for="Intelligence_current" type="range" min="@ViewBag.Inteligence" max="@ViewBag.InteligenceMax" sliderinput="" />
+                <output slideroutput=""></output>
+            </div>
+
+            <div slider="slider" class="form-group">
+                <label asp-for="Charisma_current" class="control-label"></label>
+                <input asp-for="Charisma_current" type="range" min="@ViewBag.Charisma" max="@ViewBag.CharismaMax" sliderinput="" />
+                <output slideroutput=""></output>
+            </div>
+
+
+
+            <script>
+                window.onload = function () {
+                    let values = document.querySelectorAll("[slideroutput]");
+                    let inputs = document.querySelectorAll("[sliderinput]");
+                    for (let i = 0; i < values.length; i++) {
+                        let value = values[i];
+                        let input = inputs[i];
+
+                        value.textContent = input.value;
+
+                        input.addEventListener("input", (event) => {
+                            value.textContent = event.target.value; 
+                        });
+
+                    }
+                }
+            </script>
+
+
+
+            <p></p>
+            <div class="form-group">
+                <input type="submit" value="Vytvoř" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

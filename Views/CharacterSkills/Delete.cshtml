@@ -1,0 +1,34 @@
+﻿@model DnDV4.Models.CharacterSkill
+
+@{
+    ViewData["Title"] = "Zapomínač";
+}
+
+
+<div class="row">
+	<div class="col-4">
+        <div class="alert alert-info">
+            <strong>Info!</strong> Tvůj hrdina zapomene vybranou dovednost, ale neboj, kdykoli se ji může naučit znova!
+        </div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-4">
+		<div class="btn-group">
+			<button type="submit" class="btn btn-danger">
+				Zapomeň!
+				<input type="hidden" asp-for="Id" value="@Model.Id" />
+
+			</button>
+
+			<a asp-action="Index"
+			   class="btn btn-warning"
+			   asp-route-CharacterId="@Model.CharacterId"
+			   asp-route-atribut="@Model.Atribut">
+				Rozmyslel jsem si to!
+			</a>
+		</div>
+	</div>
+</div>
+
+
