@@ -1,89 +1,114 @@
 ﻿@model IEnumerable<DnDV4.Models.Profession>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Povolání";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mana)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HpBonus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Strength)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agility)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Constitution)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Intelligence)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Charisma)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mana)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HpBonus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Strength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agility)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Constitution)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Intelligence)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Charisma)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<button class="btn btn-dark text-align-center">
+    <a asp-action="Create">Vytvoř novou rasu</a>
+</button>
+
+
+<article >
+    <div class="accordion characterCard " id="professionAccordion">
+
+        @foreach (var item in Model) {
+        <div class="accordion-item ">
+            <h2 class="accordion-header " >
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#@Html.DisplayFor(modelItem => item.Name)" aria-expanded="true" aria-controls="@Html.DisplayFor(modelItem => item.Name)">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </button>
+            </h2>
+
+            <div id="@Html.DisplayFor(modelItem => item.Name)" class="accordion-collapse collapse show " data-bs-parent="#professionAccordion">
+                <div class="accordion-body ">
+                    <div class="row">
+                        <div class="col-3">
+                            @if(item.Strength!=0)
+                                {
+                                 <div class="col ">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(model => model.Strength)
+                                    </div>
+                                    <div class="col-12">
+                                        @Html.DisplayFor(modelItem => item.Strength) - @Html.DisplayFor(modelItem => item.Strength_Max)
+                                    </div>
+                                </div>   
+                            }
+                                
+                           @if(item.Agility!=0)
+                                {
+                                 <div class="col ">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(model => model.Agility)
+                                    </div>
+                                    <div class="col-12">
+                                        @Html.DisplayFor(modelItem => item.Agility) - @Html.DisplayFor(modelItem => item.Agility_Max)
+                                    </div>
+                                </div>   
+                            }
+                            @if(item.Constitution!=0)
+                                {
+                                 <div class="col ">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(model => model.Constitution)
+                                    </div>
+                                    <div class="col-12">
+                                        @Html.DisplayFor(modelItem => item.Constitution) - @Html.DisplayFor(modelItem => item.Constitution_Max)
+                                    </div>
+                                </div>   
+                            }
+                            @if(item.Intelligence!=0)
+                                {
+                                 <div class="col ">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(model => model.Intelligence)
+                                    </div>
+                                    <div class="col-12">
+                                        @Html.DisplayFor(modelItem => item.Intelligence) - @Html.DisplayFor(modelItem => item.Intelligence_Max)
+                                    </div>
+                                </div>   
+                            }
+                            @if(item.Charisma!=0)
+                                {
+                                 <div class="col ">
+                                    <div class="col-12">
+                                        @Html.DisplayNameFor(model => model.Charisma)
+                                    </div>
+                                    <div class="col-12">
+                                        @Html.DisplayFor(modelItem => item.Charisma) - @Html.DisplayFor(modelItem => item.Charisma_Max)
+                                    </div>
+                                </div>   
+                            } 
+                        </div>
+    
+                        <div class="col-3">
+                            <div class="col ">
+                                <div class="col-12">
+                                    @Html.DisplayNameFor(model => model.Hp)
+                                </div>
+                                <div class="col-12">
+                                    @Html.DisplayFor(modelItem => item.Hp) + @Html.DisplayFor(modelItem => item.HpBonus)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 " >
+                            <textareacols="30" rows="10">@Html.DisplayFor(modelItem => item.Description)</textareacols=>
+                        </div>
+                    </div>
+                    <div class="btn btn-dark">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                
+
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</article>
+

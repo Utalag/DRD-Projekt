@@ -1,43 +1,85 @@
 ﻿@model IEnumerable<DnDV4.Models.Character>
 
-@* @{
-    ViewData["Title"] = "Seznam vytvořených postav";
-} *@
 
-<a type="button" asp-action="IndexRasy" class="btn btn-primary">Vytvoř novou posatvu</a>
+@{
+    ViewData["Title"] = "Seznam postav";
+}
 
-<!--<img class="card-img-top" src="~/images/seznamras.jpg" />-->
-    <div class="row" >
-    @foreach (var item in Model) {
+       
 
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-4 container">
 
-        <div class="col-sm-4" >
-            <div class="card" >
-                <div class="card-body ">
-                    <h4 class="card-title"> @Html.DisplayFor(modelItem => item.Race.RaceName) @Html.DisplayFor(modelItem => item.CharacterName)</h4>
-                    <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Profession.Name)</h5>
-
+            @foreach (var item in Model) {
+            <div class="col">
+                <div class="card characterCard">
                     <a asp-action="Denik" asp-route-id="@item.Id">
-                        <img width="50%" src="~/images/seznamras.jpg" />
+                    <img src="~/Images/seznamRas.jpg" class="card-img-top" alt="dočasný obrázek">
                     </a>
+                    <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.CharacterName)</h5>
+                            <h6 class="card-title">@Html.DisplayFor(modelItem => item.Race.RaceName)</h6>
+                            <h6 class="card-title">@Html.DisplayFor(modelItem => item.Profession.Name)</h6>
+                        <div class="row">
+                            <div class="col">
+                                <table class="character-table">
+                                    <tr>
+                                        <td>@Html.DisplayNameFor(model => model.Strength_current)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Strength_current)</td>
+                                    </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Agility_current)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Agility_current) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Constitution_current)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Constitution_current) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Intelligence_current)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Intelligence_current) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Charisma_current)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Charisma_current) </td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Mobility)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Mobility) </td>
+                                        </tr>
 
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Strength_current)      : @Html.DisplayFor(modelItem => item.Strength_current)      (@Html.DisplayFor(modelItem => item.Strength_bonus))</p>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Agility_current)       : @Html.DisplayFor(modelItem => item.Agility_current)       (@Html.DisplayFor(modelItem => item.Agility_bonus))</p>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Constitution_current)  : @Html.DisplayFor(modelItem => item.Constitution_current)  (@Html.DisplayFor(modelItem => item.Constitution_bonus))</p>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Intelligence_current)  : @Html.DisplayFor(modelItem => item.Intelligence_current)  (@Html.DisplayFor(modelItem => item.Intelligence_bonus))</p>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Charisma_current)      : @Html.DisplayFor(modelItem => item.Charisma_current)      (@Html.DisplayFor(modelItem => item.Charisma_bonus))</p>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.CharacterLevel)        : @Html.DisplayFor(modelItem => item.CharacterLevel) </p>
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.CharacterOrigin)</p>
+                                </table>
+                            </div>
 
-                    <p>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </p>
+                            <div class="col">
+                                <div class="row">
+                                        <div class="col">@Html.DisplayNameFor(model => model.CharacterLevel)</div>
+                                        <div class="col">@Html.DisplayFor(modelItem => item.CharacterLevel)</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--Edit/Delete-->
+                    <div class="text-center">
+                            <button >
+                                <a asp-action="Edit" asp-route-id="@item.Id">Uprav</a>
+                            </button>
+                            <button>
+                                <a asp-action="Delete" asp-route-id="@item.Id">Smaž</a>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            }
+            <!--nová postava-->
+            <div class="col new-Character">
+                <div class="card characterCard">
+                    <div class="card-body text-center">
+                        <button class="btn btn btn-dark">
+                            <a asp-action="IndexRasy" >Vytvoř novou posatvu</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    }
-    </div>
-
-
-

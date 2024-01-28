@@ -1,28 +1,31 @@
 ﻿@model DnDV4.Models.Character
 
 @{
-    ViewData["Title"] = "Detail/Deník";
+    ViewData["Title"] = "Deník";
 }
 
 
 <div class="container-fluid text-center">
-    <div class="row">
-        <div class=" col-12 border ">
-            Jméno Postavy a informace
+
+    <div class="row characterCard">
+        <div class=" col-12 border tabulka">
+			<h3>Jméno Postavy a informace</h3>
         </div>
     </div>
 
 
 
 
-    <div class="row ">
+    <div class="row characterCard">
         <!--Atributy-->
-        <div class="col-sm-6 col-xl-4 border bg-success text-white">
+        <div class="col-sm-6 col-xl-4">
+            <h3>Atributy+skily</h3>
 
             <!--Síla-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
+                       
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
                            asp-route-Atribut="@AtributEnum.strength">
@@ -34,6 +37,7 @@
                         </a>
                     </div>
                 </div>
+
                 <!--Dovednosti na Sílu-->
                 <div class="col-9 col-sm-7 col-md-9 col-xl-9 text-start">
                     <ul>
@@ -42,9 +46,12 @@
                             foreach(var item in ViewBag.Dengerousness_Strength)
                             
                             {
+                                
+
+
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class=" dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -69,7 +76,7 @@
             </div>
             <!--Obratnost-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
@@ -92,7 +99,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class=" dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -118,7 +125,7 @@
             </div>
             <!--Odolnost-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
@@ -140,7 +147,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class=" dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -164,7 +171,7 @@
             </div>
             <!--Inteligence-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
@@ -187,7 +194,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class=" dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -210,7 +217,7 @@
             </div>
             <!--Charisma-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
@@ -233,7 +240,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class="dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -257,7 +264,7 @@
             </div>
             <!--Pohyblivost-->
             <div class="row ">
-                <div class="col-3 col-sm-5 col-md-3 col-xl-3  bg-warning">
+                <div class="col-3 col-sm-5 col-md-3 col-xl-3">
                     <div>
                         <a class="text-decoration-none" asp-controller="CharacterSkills" asp-action="Index"
                            asp-route-CharacterId="@Model?.Id"
@@ -280,7 +287,7 @@
                             {
                                 <li>
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-secondary dropdown-toggle " type="button"
+                                        <button class=" dropdown-toggle " type="button"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="text-wrap">@item.Skill.Name</span>
                                         </button>
@@ -305,8 +312,8 @@
         </div>
 
         <!--zbrane-->
-        <div class="col-sm-6 col-xl-4 border bg-success text-white">
-            <h3>Zbraně + invent</h3>
+        <div class="col-sm-6 col-xl-4 border ">
+            <h3>Zbraně + Inventář</h3>
             <!--kontaktní zbraně-->
             <div>
                 <table class="table">
@@ -383,16 +390,10 @@
         </div>
 
 
-        <div class="col-sm-12 col-xl-4 border bg-success text-white">
+        <div class="col-sm-12 col-xl-4 border ">
             <h3>Kouzla</h3>
 
         </div>
     </div>
 </div>
 
-
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
