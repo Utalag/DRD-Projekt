@@ -35,27 +35,37 @@ namespace DnDV4.Models
 
         [Display(Name = "Síla")]
         public int Strength                 { get;set;}
+        [Display(Name = "Síla Max")]
         public int Strength_Max             { get;set;}
+        [Display(Name = "Oprava")]
         public int Strength_Corection       { get;set;}
 
         [Display(Name = "Obratnost")]
         public int Agility                { get;set;}
+        [Display(Name = "Obratnost Max")]
         public int Agility_Max            { get;set;}
+        [Display(Name = "Oprava")]
         public int Agility_Corection      { get;set;}
 
         [Display(Name = "Odolnost")]
         public int Constitution             { get;set;}
+        [Display(Name = "Odolnost Max")]
         public int Constitution_Max         { get;set;}
+        [Display(Name = "Oprava")]
         public int Constitution_Corection   { get;set;}
 
         [Display(Name = "Inteligence")]
         public int Intelligence             { get;set;}
+        [Display(Name = "Inteligence Max")]
         public int Intelligence_Max         { get;set;}
+        [Display(Name = "Oprava")]
         public int Intelligence_Correction  { get;set;}
 
         [Display(Name = "Charisma")]
         public int Charisma                 { get;set;}
+        [Display(Name = "Charisma Max")]
         public int Charisma_Max             { get;set;}
+        [Display(Name = "Oprava")]
         public int Charisma_Correction      { get;set;}
         public int Strength_DiceRoll        { get { return DiceRoll(Strength,     Strength_Max         ); } set { } }
         public int Dexterity_DiceRoll       { get { return DiceRoll(Agility,      Agility_Max    ); } set { } }

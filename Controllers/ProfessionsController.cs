@@ -54,9 +54,8 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PovolaniNazev,PopisPovolani,Mana,Hp,HpBonus," +
-                                                        "Sila,Obratnost,Odolnost,Inteligence,Charisma," +
-                                                        "SilaMax,ObratnostMax,OdolnostMax,InteligenceMax,CharismaMax,")] Profession profession)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Mana,Hp,HpBonus," +
+														"Strength,Agility,Constitution,Intelligence,Charisma")] Profession profession)
         {
             if (ModelState.IsValid)
             {
@@ -88,10 +87,9 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PovolaniNazev,PopisPovolani,Mana,Hp,HpBonus," +
-                                                        "Sila,Obratnost,Odolnost,Inteligence,Charisma," +
-                                                        "SilaMax,ObratnostMax,OdolnostMax,InteligenceMax,CharismaMax,")] Profession profession)
-        {
+        public async Task<IActionResult> Edit(int id,[Bind("Id,Name,Description,Mana,Hp,HpBonus," +
+														"Strength,Agility,Constitution,Intelligence,Charisma")] Profession profession)
+		{
             if (id != profession.Id)
             {
                 return NotFound();

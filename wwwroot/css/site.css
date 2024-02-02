@@ -12640,14 +12640,15 @@ body {
 
 #mainNav {
     min-height: 3.5rem;
-    background-color: #fff;
+    background-color: #606060;
+    z-index: 1500;
 }
 
     #mainNav .navbar-toggler {
         font-size: 80%;
         padding: 0.75rem;
-        color: #64a19d;
-        border: 1px solid #64a19d;
+        color: #000;
+        border: 1px solid #000;
     }
 
         #mainNav .navbar-toggler:focus {
@@ -12664,6 +12665,7 @@ body {
         color: fade(#fff, 80%);
         outline: none;
         background-color: transparent;
+        
     }
 
     #mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
@@ -12676,7 +12678,7 @@ body {
         padding-top: 0;
         padding-bottom: 0;
         border-bottom: none;
-        background-color: transparent;
+        background-color: #4a2513;
         transition: background-color 0.3s ease-in-out;
     }
 

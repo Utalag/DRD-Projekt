@@ -5,10 +5,11 @@
 }
 
 
-<form asp-action="Edit">
+<form asp-action="Edit" >
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="characterCard">
     <div class="row">
-        <div class="col-6 border border bg-warning">
+        <div class="col-12 text-center">
 
             <div class="form-group">
                 <label asp-for="RaceName" class="control-label"></label>
@@ -17,145 +18,152 @@
             </div>
         </div>
 
-        <div class="col-6 border border bg-warning">
+        <div class="col-12 text-center">
             <div class="form-group">
                 <label asp-for="RaceDescription" class="control-label"></label>
-                <input asp-for="RaceDescription" class="form-control" />
-                <span asp-validation-for="RaceDescription" class="text-danger"></span>
+                    <textarea asp-for="RaceDescription" class="form-control"> </textarea>
+                    <span asp-validation-for="RaceDescription" class="text-danger"></span>
             </div>
 
         </div>
     </div>
 
     <div class="row">
-        <div class="container-fluid bg-light">
+        <div class="container">
             <div class="row">
 
-                <div class="col-2 border border bg-warning">
-
-                    <div class="form-group">
-                        <label asp-for="Strength" class="control-label"></label>
-                        <input asp-for="Strength" class="form-control" />
-                        <span asp-validation-for="Strength" class="text-danger"></span>
-                        <div class="form-group w-100">
-                            <label asp-for="Strength_Max" class="control-label"></label>
-                            <input asp-for="Strength_Max" class="form-control" />
+                <div class="col-2 text-center">
+					<h6><label asp-for="Strength" class="control-label"></label></h6>
+                    
+                        <div class ="form-group">
+							Min
+                            <input asp-for="Strength" class="form-control text-center" />
+							<span asp-validation-for="Strength" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            Max
+                            <input asp-for="Strength_Max" class="form-control text-center" />
                             <span asp-validation-for="Strength_Max" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Strength_Corection" class="control-label"></label>
-                            <input asp-for="Strength_Corection" class="form-control" />
+                            <input asp-for="Strength_Corection" class="form-control text-center" />
                             <span asp-validation-for="Strength_Corection" class="text-danger"></span>
                         </div>
-                    </div>
+                    
                 </div>
 
 
-                <div class="col-2 border border bg-warning">
+                <div class="col-2">
+                    <h6><label asp-for="Agility" class="control-label"></label></h6>
                     <div class="form-group">
-                        <label asp-for="Agility" class="control-label"></label>
-                        <input asp-for="Agility" class="form-control" />
+                        Min
+                        <input asp-for="Agility" class="form-control text-center" />
                         <span asp-validation-for="Agility" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Agility_Max" class="control-label"></label>
-                        <input asp-for="Agility_Max" class="form-control" />
-                        <span asp-validation-for="Agility_Max" class="text-danger"></span>
+                        Max
+                        <input asp-for="Agility_Max" class="form-control text-center" />
+                        <span asp-validation-for="Agility_Max" class="text-danger "></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Agility_Corection" class="control-label"></label>
-                        <input asp-for="Agility_Corection" class="form-control" />
+                        <input asp-for="Agility_Corection" class="form-control text-center" />
                         <span asp-validation-for="Agility_Corection" class="text-danger"></span>
                     </div>
                 </div>
 
 
-                <div class="col-2 border bg-warning">
+                <div class="col-2">
+                    <h6><label asp-for="Constitution" class="control-label"></label></h6>
                     <div class="form-group">
-                        <label asp-for="Constitution" class="control-label"></label>
-                        <input asp-for="Constitution" class="form-control" />
+                        Min
+                        <input asp-for="Constitution" class="form-control text-center" />
                         <span asp-validation-for="Constitution" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Constitution_Max" class="control-label"></label>
-                        <input asp-for="Constitution_Max" class="form-control" />
+                        Max
+                        <input asp-for="Constitution_Max" class="form-control text-center" />
                         <span asp-validation-for="Constitution_Max" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Constitution_Corection" class="control-label"></label>
-                        <input asp-for="Constitution_Corection" class="form-control" />
+                        <input asp-for="Constitution_Corection" class="form-control text-center" />
                         <span asp-validation-for="Constitution_Corection" class="text-danger"></span>
                     </div>
                 </div>
 
 
-                <div class="col-2 border bg-warning">
+                <div class="col-2 ">
+                    <h6><label asp-for="Intelligence" class="control-label"></label></h6>
                     <div class="form-group">
-                        <label asp-for="Intelligence" class="control-label"></label>
-                        <input asp-for="Intelligence" class="form-control" />
+                        Min
+                        <input asp-for="Intelligence" class="form-control text-center" />
                         <span asp-validation-for="Intelligence" class="text-danger"></span>
                     </div>
                     <div class="form-group ">
-                        <label asp-for="Intelligence_Max" class="control-label"></label>
-                        <input asp-for="Intelligence_Max" class="form-control" />
+                        Max
+                        <input asp-for="Intelligence_Max" class="form-control text-center" />
                         <span asp-validation-for="Intelligence_Max" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Intelligence_Correction" class="control-label"></label>
-                        <input asp-for="Intelligence_Correction" class="form-control" />
+                        <input asp-for="Intelligence_Correction" class="form-control text-center" />
                         <span asp-validation-for="Intelligence_Correction" class="text-danger"></span>
                     </div>
                 </div>
 
 
-                <div class="col-2 border bg-warning">
+                <div class="col-2">
+                    <h6><label asp-for="Charisma" class="control-label"></label></h6>
                     <div class="form-group">
-                        <label asp-for="Charisma" class="control-label"></label>
-                        <input asp-for="Charisma" class="form-control" />
+                        Min
+                        <input asp-for="Charisma" class="form-control text-center" />
                         <span asp-validation-for="Charisma" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Charisma_Max" class="control-label"></label>
-                        <input asp-for="Charisma_Max" class="form-control" />
+                        Max
+                        <input asp-for="Charisma_Max" class="form-control text-center" />
                         <span asp-validation-for="Charisma_Max" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Charisma_Correction" class="control-label"></label>
-                        <input asp-for="Charisma_Correction" class="form-control" />
+                        <input asp-for="Charisma_Correction" class="form-control text-center" />
                         <span asp-validation-for="Charisma_Correction" class="text-danger"></span>
                     </div>
                 </div>
 
 
-                <div class="col-2 border bg-warning">
+                <div class="col-2">
                     <div class="form-group">
                         <label asp-for="Mobility" class="control-label"></label>
-                        <input asp-for="Mobility" class="form-control" />
+                        <input asp-for="Mobility" class="form-control text-center" />
                         <span asp-validation-for="Mobility" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="RaceSize" class="control-label"></label>
-                        <input asp-for="RaceSize" class="form-control" />
+                        <input asp-for="RaceSize" class="form-control text-center" />
                         <span asp-validation-for="RaceSize" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="SpecialAbilities" class="control-label"></label>
-                        <input asp-for="SpecialAbilities" class="form-control" />
+                        <input asp-for="SpecialAbilities" class="form-control text-center" />
                         <span asp-validation-for="SpecialAbilities" class="text-danger"></span>
                     </div>
                 </div>
 
             </div>
         </div>
-
-        <input type="submit" value="Ulož" class="col-6 border bg-warning" />
-
-        <a asp-action="Index" class="col-6 border bg-warning">Zpět</a>
-
     </div>
+    </div>
+	<div>
+		<input type="submit" value="Ulož" class="btn btn-primary" />
 
+		<a asp-action="Index" class="btn btn-primary ">Zpět</a>
+	</div>
 </form>
+
 
 
 @section Scripts {

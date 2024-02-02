@@ -64,7 +64,12 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,RaceName,RaceDescriprion,RaceSize,Mobility,SpecialAbilities,Sila,SilaMax,Sila_Oprava,Obratnost,ObratnostMax,Obratnost_Oprava,Odolnost,OdolnostMax,Odolnost_Oprava,Inteligence,InteligenceMax,Inteligence_Oprava,Charisma,CharismaMax,Charisma_Oprava")] Race race)
+        public async Task<IActionResult> Create([Bind("Id,RaceName,RaceDescription,RaceSize,Mobility,SpecialAbilities," +
+            "Strength,Strength_Max,Strength_Corection," +
+            "Agility,Agility_Max,Agility_Corection," +
+            "Constitution,Constitution_Max,Constitution_Corection," +
+            "Intelligence,Intelligence_Max,Intelligence_Correction," +
+            "Charisma,Charisma_Max,Charisma_Correction")] Race race)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +106,12 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,RaceName,RaceDescriprion,RaceSize,Mobility,SpecialAbilities,Sila,SilaMax,Sila_Oprava,Obratnost,ObratnostMax,Obratnost_Oprava,Odolnost,OdolnostMax,Odolnost_Oprava,Inteligence,InteligenceMax,Inteligence_Oprava,Charisma,CharismaMax,Charisma_Oprava")] Race race)
+        public async Task<IActionResult> Edit(int id,[Bind("Id,RaceName,RaceDescription,RaceSize,Mobility,SpecialAbilities," +
+            "Strength,Strength_Max,Strength_Corection," +
+            "Agility,Agility_Max,Agility_Corection," +
+            "Constitution,Constitution_Max,Constitution_Corection," +
+            "Intelligence,Intelligence_Max,Intelligence_Correction," +
+            "Charisma,Charisma_Max,Charisma_Correction")] Race race)
         {
             if (id != race.Id)
             {

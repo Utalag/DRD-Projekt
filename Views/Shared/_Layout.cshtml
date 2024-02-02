@@ -30,10 +30,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
 
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Characters" asp-action="Index">Deník</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Professions" asp-action="Index">Povolíní</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Races" asp-action="Index">Rasy</a></li>
-                        <li class="nav-item"><a class="nav-link text-dark" asp-area="" asp-controller="Skills" asp-action="Index">Dovednosti</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Characters" asp-action="Index">Deník</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Professions" asp-action="Index">Povolíní</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Races" asp-action="Index">Rasy</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Skills" asp-action="Index">Dovednosti</a></li>
 
                     </ul>
                 </div>
@@ -44,6 +44,7 @@
 
     <article>
         <h1 class="text-center">@ViewBag.Title</h1>
+        
 		<div>@RenderBody()</div>
 	</article>
 

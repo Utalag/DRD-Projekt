@@ -5,24 +5,25 @@
 }
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Nová rasa</a>
 </p>
+
 
 @foreach (var item in Model) {
 
-        <div class="container-fluid bg-light">
+    <div class="container-fluid characterCard">
         <div class="row ">
 
-            <div class="col-2 bg-warning text-center">
+            <div class="col-2">
                     <div>
                         @Html.DisplayFor(modelItem => item.RaceName)
                     </div>
                     <div>
                         @Html.DisplayFor(modelItem => item.RaceSize)
                     </div>
-                </div>
+            </div>
 
-            <div class="col-2 bg-warning text-center ">
+            <div class="col-2 text-center">
                     <div>
                         @Html.DisplayNameFor(model => model.Strength)
                     </div>
@@ -31,9 +32,9 @@
                         @Html.DisplayFor(modelItem => item.Strength_Max)
                         (@Html.DisplayFor(modelItem => item.Strength_Corection))
                     </div>
-                </div>
+            </div>
 
-            <div class="col-2 bg-warning  text-center">
+            <div class="col-2 text-center">
                     <div>
                         @Html.DisplayNameFor(model => model.Agility)
                     </div>
@@ -42,9 +43,9 @@
                         @Html.DisplayFor(modelItem => item.Agility_Max)
                         (@Html.DisplayFor(modelItem => item.Agility_Corection))
                     </div>
-                </div>
+            </div>
 
-                <div class="col-2 bg-warning ">
+            <div class="col-2 text-center">
                     <div>
                         @Html.DisplayNameFor(model => model.Constitution)
                     </div>
@@ -53,9 +54,9 @@
                         @Html.DisplayFor(modelItem => item.Constitution_Max)
                         (@Html.DisplayFor(modelItem => item.Constitution_Corection))
                     </div>
-                </div>
+            </div>
 
-                <div class="col-2 bg-warning ">
+            <div class="col-2 text-center">
                     <div>
                         @Html.DisplayNameFor(model => model.Intelligence)
                     </div>
@@ -64,9 +65,9 @@
                         @Html.DisplayFor(modelItem => item.Intelligence_Max)
                         (@Html.DisplayFor(modelItem => item.Intelligence_Correction))
                     </div>
-                </div>
+            </div>
 
-                <div class="col-2 bg-warning ">
+            <div class="col-2 text-center">
                     <div>
                         @Html.DisplayNameFor(model => model.Charisma)
                     </div>
@@ -75,28 +76,29 @@
                         @Html.DisplayFor(modelItem => item.Charisma_Max)
                         (@Html.DisplayFor(modelItem => item.Charisma_Correction))
                     </div>
-                </div>
             </div>
         </div>
+    
 
         <div class="row">
 
             <div class="col-4 ">
                 <div>
-                    <a asp-action="Edit" asp-route-id="@item.Id" calss="btn-secondary" >Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn " >Upravit</a>
                 </div>
             </div>
 
             <div class="col-4  ">
                 <div>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn ">Podrobnosti</a>
                 </div>
             </div>
 
             <div class="col-4  ">
                 <div>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn ">Smazat</a>
                 </div>
             </div>
         </div>
+    </div>
 }

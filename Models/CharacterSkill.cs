@@ -3,23 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DnDV4.Models
 {
-    public enum RangeSkillEnum
-    {
-        [Display(Name = "Vůbec")]
-        vubec,
-        [Display(Name = "Velmi špatně")]
-        vSpatne,
-        [Display(Name = "Špatně")]
-        spatne,
-        [Display(Name = "Půměrně")]
-        prumerne,
-        [Display(Name = "Dobře")]
-        dobre,
-        [Display(Name = "Velmi dobře")]
-        vDobre,
-        [Display(Name = "Dokonale")]
-        dokonale
-    }
 
     public class CharacterSkill
     {

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Cors;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing.Text;
 namespace DnDV4.Models
 {
@@ -27,16 +29,21 @@ namespace DnDV4.Models
         public int Hp       { get; set; }
         public int HpBonus  { get; set; }
 
-        
+
 
 
 
         //Atribury------------------------------------------------------------------------------------------
+        [Display(Name ="Síla")]
         public int Strength     { get; set; }
-        public int Agility    { get; set; }
-        public int Constitution { get; set; }
-        public int Intelligence { get; set; }
-        public int Charisma     { get; set; }
+		[Display(Name = "Obratnost")]
+		public int Agility    { get; set; }
+		[Display(Name = "Odolnost")]
+		public int Constitution { get; set; }
+		[Display(Name = "Inteligence")]
+		public int Intelligence { get; set; }
+		[Display(Name = "Charsisma")]
+		public int Charisma     { get; set; }
 
 
         //implementace AtributuMAx
