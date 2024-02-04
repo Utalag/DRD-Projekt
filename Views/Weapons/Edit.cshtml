@@ -1,0 +1,134 @@
+﻿@model DnDV4.Models.Weapon
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Weapon</h4>
+<hr />
+<div class="row characterCard">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NameWeapon" class="control-label"></label>
+                <input asp-for="NameWeapon" class="form-control" />
+                <span asp-validation-for="NameWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NickName" class="control-label"></label>
+                <input asp-for="NickName" class="form-control" />
+                <span asp-validation-for="NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SZ" class="control-label"></label>
+                <input asp-for="SZ" class="form-control" />
+                <span asp-validation-for="SZ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UT" class="control-label"></label>
+                <input asp-for="UT" class="form-control" />
+                <span asp-validation-for="UT" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OZ" class="control-label"></label>
+                <input asp-for="OZ" class="form-control" />
+                <span asp-validation-for="OZ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClassWeapon" class="control-label"></label>
+                <select asp-for="ClassWeapon" class="form-control" asp-items="Html.GetEnumSelectList<WeaponClassEnum>()"></select>
+                <span asp-validation-for="ClassWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeWeapon" class="control-label"></label>
+                <select asp-for="SizeWeapon" class="form-control" asp-items="Html.GetEnumSelectList<WeaponSizeEnum>()"></select>
+                <span asp-validation-for="SizeWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeWeapon" class="control-label"></label>
+                <select asp-for="TypeWeapon" class="form-control" asp-items="Html.GetEnumSelectList<WeaponTypeEnum>()"></select>
+                <span asp-validation-for="TypeWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Manufacturer" class="control-label"></label>
+                <input asp-for="Manufacturer" class="form-control" />
+                <span asp-validation-for="Manufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ManufacturerBonus" class="control-label"></label>
+                <input asp-for="ManufacturerBonus" class="form-control" />
+                <span asp-validation-for="ManufacturerBonus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Metal" class="control-label"></label>
+                <input asp-for="Metal" class="form-control" />
+                <span asp-validation-for="Metal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Demon" class="control-label"></label>
+                <input asp-for="Demon" class="form-control" />
+                <span asp-validation-for="Demon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinimalControllability" class="control-label"></label>
+                <input asp-for="MinimalControllability" class="form-control"  />
+                <span asp-validation-for="MinimalControllability" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ControlAttribute" class="control-label"></label>
+                <select asp-for="ControlAttribute" class="form-control" asp-items="Html.GetEnumSelectList<AtributEnum>()"></select>
+                <span asp-validation-for="ControlAttribute" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LengthWeapon" class="control-label"></label>
+                <input asp-for="LengthWeapon" class="form-control"  />
+                <span asp-validation-for="LengthWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightWeapon" class="control-label"></label>
+                <input asp-for="WeightWeapon" class="form-control" />
+                <span asp-validation-for="WeightWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InitiativeWeapon" class="control-label"></label>
+                <input asp-for="InitiativeWeapon" class="form-control"  />
+                <span asp-validation-for="InitiativeWeapon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinGunshot" class="control-label"></label>
+                <input asp-for="MinGunshot" class="form-control" />
+                <span asp-validation-for="MinGunshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleGunshot" class="control-label"></label>
+                <input asp-for="MiddleGunshot" class="form-control" />
+                <span asp-validation-for="MiddleGunshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxGunshot" class="control-label"></label>
+                <input asp-for="MaxGunshot" class="form-control" />
+                <span asp-validation-for="MaxGunshot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

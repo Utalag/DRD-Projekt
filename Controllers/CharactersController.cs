@@ -193,6 +193,7 @@ namespace DnDV4.Controllers
             ViewData["Dengerousness_Intelligence"] = DangerousnessSkill(AtributEnum.intelligence);
             ViewData["Dengerousness_Charisma"] = DangerousnessSkill(AtributEnum.charisma);
             ViewData["Dengerousness_Mobility"] = DangerousnessSkill(AtributEnum.mobility);
+            ViewData["Weapon"] = context.Weapon;
 
             if(character == null)
             {
@@ -203,42 +204,42 @@ namespace DnDV4.Controllers
         }
 
 
-        // GET: Výběr dovednosti
-        public async Task<IActionResult> IndexSkills(AtributEnum atribut,int? Id,int? skillPoint)
-        {
+        //// GET: Výběr dovednosti
+        //public async Task<IActionResult> IndexSkills(AtributEnum atribut,int? Id,int? skillPoint)
+        //{
 
 
 
 
-            var skillContext = context.Skill.Include(c => c.SkillTable)
-                .Where(x => x.Atribut == atribut);                    // vypíše skilly podle předaného atributu
+        //    var skillContext = context.Skill.Include(c => c.SkillTable)
+        //        .Where(x => x.Atribut == atribut);                    // vypíše skilly podle předaného atributu
 
 
-            int sumSkillPointForAtribute = 0;    // součet bodů u dané dovednosti
+        //    int sumSkillPointForAtribute = 0;    // součet bodů u dané dovednosti
 
 
-            foreach(var skill in skillContext)  // prohledání všech skillů v dané dovednosti a jejich součet 
-            {
-                var sumCurrent = context.CharacterSkill.
-                    Where(x => x.SkillId == skill.Id)   // id skilu == 
-                    .Sum(x => x.SkillPoint_curentValue);
-                sumSkillPointForAtribute += sumCurrent;
+        //    foreach(var skill in skillContext)  // prohledání všech skillů v dané dovednosti a jejich součet 
+        //    {
+        //        var sumCurrent = context.CharacterSkill.
+        //            Where(x => x.SkillId == skill.Id)   // id skilu == 
+        //            .Sum(x => x.SkillPoint_curentValue);
+        //        sumSkillPointForAtribute += sumCurrent;
 
-                ViewBag.CurrentSkillPoint = sumCurrent;
-            }
-
-
-            int sumSkillPoint = sumSkillPointForAtribute; // mezikrok - součet do čistého int 
-
-            ViewBag.CharacterId = Id;                           // 
-            ViewBag.SkillPoint = skillPoint - sumSkillPoint;
-            ViewBag.Test = sumSkillPoint;
+        //        ViewBag.CurrentSkillPoint = sumCurrent;
+        //    }
 
 
+        //    int sumSkillPoint = sumSkillPointForAtribute; // mezikrok - součet do čistého int 
+
+        //    ViewBag.CharacterId = Id;                           // 
+        //    ViewBag.SkillPoint = skillPoint - sumSkillPoint;
+        //    ViewBag.Test = sumSkillPoint;
 
 
-            return View(await skillContext.ToListAsync());
-        }
+
+
+        //    return View(await skillContext.ToListAsync());
+        //}
 
 
 

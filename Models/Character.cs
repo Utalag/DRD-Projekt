@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DnDV4.Models
 {
-    // Profession => SubProfession  => CHARACTER    => Deník
-    //                Race          => CHARACTER    => Deník
-    // Profibod   =>  Skill         => CHARACTER    => Deník
+    // Profession                   => CHARACTER    => Deník
+    //               Race           => CHARACTER    => Deník
+    // Profibod   -  Skill         <=> CHARACTER    => Deník
+    //               Weapon         => CHARACTER    => Deník
 
     public class Character : IAtribut
     {
@@ -18,9 +19,11 @@ namespace DnDV4.Models
         public Profession? Profession { get; set; }
 
         [Display(Name = "Rasa")]
-        public int RaceId { get; set; }                    // záislost na Race
-        public Race? Race { get; set; }            // záislost na Race
-        public List<CharacterSkill> CharacterSkill { get; set; } = new();
+        public int RaceId { get; set; }
+        public Race? Race { get; set; }         //Vazba 1:N
+
+        public List<CharacterSkill> CharacterSkill { get; set; } = new();       //vazba M:N
+        public List<CharacterWeapon> CharacterWeapon { get; set; } = new();     //vazba M:N
 
         [Display(Name = "Jméno tvé postavy")]
         public string CharacterName { get; set; } = string.Empty;

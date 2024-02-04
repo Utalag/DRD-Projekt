@@ -1,0 +1,155 @@
+﻿@model IEnumerable<DnDV4.Models.Weapon>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table characterCard">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SZ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OZ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SizeWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManufacturerBonus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Metal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Demon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinimalControllability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ControlAttribute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LengthWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WeightWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InitiativeWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinGunshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleGunshot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxGunshot)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SZ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OZ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ManufacturerBonus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Metal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Demon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinimalControllability)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ControlAttribute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LengthWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeightWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InitiativeWeapon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinGunshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleGunshot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxGunshot)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

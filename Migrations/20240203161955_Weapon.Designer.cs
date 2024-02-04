@@ -4,6 +4,7 @@ using DnDV4.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnDV4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203161955_Weapon")]
+    partial class Weapon
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,29 +206,6 @@ namespace DnDV4.Migrations
                     b.HasIndex("SkillId");
 
                     b.ToTable("CharacterSkill");
-                });
-
-            modelBuilder.Entity("DnDV4.Models.CharacterWeapon", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CharacterID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WeaponId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CharacterID");
-
-                    b.HasIndex("WeaponId");
-
-                    b.ToTable("CharacterWeapon");
                 });
 
             modelBuilder.Entity("DnDV4.Models.Profession", b =>
@@ -513,7 +493,7 @@ namespace DnDV4.Migrations
                     b.Property<int>("ControlAttribute")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Demon")
+                    b.Property<int>("Demon")
                         .HasColumnType("int");
 
                     b.Property<int>("InitiativeWeapon")
@@ -523,22 +503,24 @@ namespace DnDV4.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Manufacturer")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ManufacturerBonus")
+                    b.Property<int>("ManufacturerBonus")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MaxGunshot")
+                    b.Property<int>("MaxGunshot")
                         .HasColumnType("int");
 
                     b.Property<string>("Metal")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MiddleGunshot")
+                    b.Property<int>("MiddleGunshot")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MinGunshot")
+                    b.Property<int>("MinGunshot")
                         .HasColumnType("int");
 
                     b.Property<int>("MinimalControllability")
@@ -550,28 +532,23 @@ namespace DnDV4.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NickName")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("OZ")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Price")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("SZ")
                         .HasColumnType("int");
 
-                    b.Property<int>("SizeWeapon")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TypeWeapon")
-                        .HasColumnType("int");
-
                     b.Property<int>("UT")
                         .HasColumnType("int");
 
-                    b.Property<int?>("WeightWeapon")
+                    b.Property<int>("WeightWeapon")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -819,25 +796,6 @@ namespace DnDV4.Migrations
                     b.Navigation("Skill");
                 });
 
-            modelBuilder.Entity("DnDV4.Models.CharacterWeapon", b =>
-                {
-                    b.HasOne("DnDV4.Models.Character", "Character")
-                        .WithMany("CharacterWeapon")
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DnDV4.Models.Weapon", "Weapon")
-                        .WithMany("CharacterWeapon")
-                        .HasForeignKey("WeaponId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Character");
-
-                    b.Navigation("Weapon");
-                });
-
             modelBuilder.Entity("DnDV4.Models.Skill", b =>
                 {
                     b.HasOne("DnDV4.Models.SkillTable", "SkillTable")
@@ -901,8 +859,6 @@ namespace DnDV4.Migrations
             modelBuilder.Entity("DnDV4.Models.Character", b =>
                 {
                     b.Navigation("CharacterSkill");
-
-                    b.Navigation("CharacterWeapon");
                 });
 
             modelBuilder.Entity("DnDV4.Models.Profession", b =>
@@ -923,11 +879,6 @@ namespace DnDV4.Migrations
             modelBuilder.Entity("DnDV4.Models.SkillTable", b =>
                 {
                     b.Navigation("Skills");
-                });
-
-            modelBuilder.Entity("DnDV4.Models.Weapon", b =>
-                {
-                    b.Navigation("CharacterWeapon");
                 });
 #pragma warning restore 612, 618
         }

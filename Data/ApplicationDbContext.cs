@@ -17,6 +17,7 @@ namespace DnDV4.Data
             base.OnModelCreating(builder);
         }
         public DbSet<DnDV4.Models.CharacterSkill> CharacterSkill { get; set; } = default!;
+        public DbSet<DnDV4.Models.Weapon> Weapon { get; set; } = default!;
 
     }
 }

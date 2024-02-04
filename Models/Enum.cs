@@ -45,10 +45,46 @@ namespace DnDV4.Models
         [Display(Name = "Charisma")]
         charisma,
         [Display(Name = "Pohyblivost")]
-        mobility
+        mobility,
+        [Display(Name = "Síla+Obratnost")]
+        strengthANDagility = strength|agility
     }
 
+    public enum WeaponClassEnum
+    {
+        [Display(Name = "Jednoruční")]
+        oneHanded,
+        [Display(Name = "Obouruční")]
+        twoHanded,
+        [Display(Name = "Vrhací")]
+        throwing,
+        [Display(Name = "Střelná")]
+        firearm,
+        
+    }
 
+    public enum WeaponTypeEnum
+    {
+        [Display(Name = "Úderná")]
+        striking,
+        [Display(Name = "Drtivá")]
+        crushing,
+        [Display(Name = "Bodná")]
+        stab,
+        [Display(Name = "Sečná")]
+        cut,
+    }
+
+    public enum WeaponSizeEnum
+    {
+        [Display(Name = "Lehká")]
+        light,
+        [Display(Name = "Střední")]
+        medium,
+        [Display(Name = "Těžká")]
+        heavy,
+        
+    }
 
     static class Enum
     {

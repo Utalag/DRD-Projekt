@@ -28,10 +28,9 @@ namespace DnDV4.Models
         [Display(Name = "Specíální dovednost")]
         public string? SpecialAbilities { get; set; }
 
-        // + atributy 
-
-        //  NAVIGACE
-        public ICollection<Character>? Characters { get; set; }
+        
+        // NAVIGACE
+         public ICollection<Character>? Characters { get; set; }
 
         [Display(Name = "Síla")]
         public int Strength                 { get;set;}
@@ -81,7 +80,7 @@ namespace DnDV4.Models
             return roll;
         }
 
-        
+
 
     }
 

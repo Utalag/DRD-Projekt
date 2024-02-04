@@ -45,7 +45,7 @@
 
 .characterCard {
     background-color: rgba(255, 255, 220, 0.5);
-    border: 5px black solid;
+    border: 3px black solid;
     border-radius: 5px;
 }
 
@@ -6058,7 +6058,7 @@ textarea.form-control-lg {
     --bs-modal-width: 500px;
     --bs-modal-padding: 1rem;
     --bs-modal-margin: 0.5rem;
-    --bs-modal-color:;
+    --bs-modal-color: #000;
     --bs-modal-bg: #fff;
     --bs-modal-border-color: var(--bs-border-color-translucent);
     --bs-modal-border-width: 1px;
