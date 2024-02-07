@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DnDV4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240207002833_Race-AddImage")]
-    partial class RaceAddImage
+    [Migration("20240207144052_ImagePatch-in-Race")]
+    partial class ImagePatchinRace
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -356,11 +356,12 @@ namespace DnDV4.Migrations
                     b.Property<int>("Constitution_Max")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("Dataimage")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<int>("Dexterity_DiceRoll")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Intelligence")
                         .HasColumnType("int");

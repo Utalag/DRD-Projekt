@@ -13,7 +13,7 @@
             <div class="col">
                 <div class="card characterCard">
                     <a asp-action="Denik" asp-route-id="@item.Id">
-                    <img src="~/Images/seznamRas.jpg" class="card-img-top" alt="dočasný obrázek">
+                    <img src="@Url.Content(@item.Race.ImagePath)" class="card-img-top" alt="dočasný obrázek">
                     </a>
                     <div class="card-body">
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.CharacterName)</h5>

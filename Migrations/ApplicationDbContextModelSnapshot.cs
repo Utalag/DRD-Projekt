@@ -356,6 +356,10 @@ namespace DnDV4.Migrations
                     b.Property<int>("Dexterity_DiceRoll")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Intelligence")
                         .HasColumnType("int");
 

@@ -5,23 +5,24 @@
 namespace DnDV4.Migrations
 {
     /// <inheritdoc />
-    public partial class RaceAddImage : Migration
+    public partial class ImagePatchinRace : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "Dataimage",
+            migrationBuilder.AddColumn<string>(
+                name: "ImagePath",
                 table: "Races",
-                type: "varbinary(max)",
-                nullable: true);
+                type: "nvarchar(max)",
+                nullable: false,
+                defaultValue: "");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Dataimage",
+                name: "ImagePath",
                 table: "Races");
         }
     }

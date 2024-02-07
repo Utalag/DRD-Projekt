@@ -403,3 +403,8 @@ const Collapse = (($) => {
 export default Collapse
 
 
+const parentElement = document.getElementById('obsah'); // Najdeme rodičovský element
+const newChild = document.createElement('img'); // Vytvoříme nový element (např. obrázek)
+newChild.src = '~/Images/Race/elf.jpeg'; // Nastavíme novou URL obrázku
+const oldChild = parentElement.querySelector('img'); // Najdeme stávající element (starý obrázek)
+parentElement.replaceChild(newChild, oldChild); // Nahradíme starý element novým

@@ -1,4 +1,5 @@
 ﻿using DnDV4.Models;
+using System.Drawing;
 using System.Security.Cryptography;
 
 namespace DnDV4.Data
@@ -26,7 +27,8 @@ namespace DnDV4.Data
                 Agility    =11, Agility_Max   =16, Agility_Corection    = 2, Dexterity_DiceRoll   =1,
                 Constitution = 8, Constitution_Max=13, Constitution_Corection = 0, Constitution_DiceRoll=1,
                 Intelligence =10, Intelligence_Max=15, Intelligence_Correction=-2, Intelligence_DiceRoll=1,
-                Charisma     = 8, Charisma_Max    =18, Charisma_Correction    = 3, Charisma_DiceRoll    =2  },
+                Charisma     = 8, Charisma_Max    =18, Charisma_Correction    = 3, Charisma_DiceRoll    =2,
+                ImagePath = "~/Images/Race/hobbit.jpeg" },
 
                 new (){
                 RaceName       ="Gnom",
@@ -38,7 +40,8 @@ namespace DnDV4.Data
                 Agility    =10, Agility_Max   =15, Agility_Corection    = 1, Dexterity_DiceRoll   =1,
                 Constitution =10, Constitution_Max=15, Constitution_Corection = 1, Constitution_DiceRoll=1,
                 Intelligence = 9, Intelligence_Max=14, Intelligence_Correction=-2, Intelligence_DiceRoll=1,
-                Charisma     = 7, Charisma_Max    =12, Charisma_Correction    = 0, Charisma_DiceRoll    =1  },
+                Charisma     = 7, Charisma_Max    =12, Charisma_Correction    = 0, Charisma_DiceRoll    =1,
+                ImagePath = "~/Images/Race/gnom.jpeg"},
 
                 new (){
                 RaceName       ="Trpaslík",
@@ -50,7 +53,8 @@ namespace DnDV4.Data
                 Agility    = 7, Agility_Max   =12, Agility_Corection    =-2, Dexterity_DiceRoll   =1,
                 Constitution =12, Constitution_Max=17, Constitution_Corection = 3, Constitution_DiceRoll=1,
                 Intelligence = 8, Intelligence_Max=13, Intelligence_Correction=-3, Intelligence_DiceRoll=1,
-                Charisma     = 7, Charisma_Max    =12, Charisma_Correction    =-2, Charisma_DiceRoll    =1  },
+                Charisma     = 7, Charisma_Max    =12, Charisma_Correction    =-2, Charisma_DiceRoll    =1,
+                ImagePath = "~/Images/Race/trpaslik.jpeg"},
 
                 new (){
                 RaceName       ="Elf",
@@ -62,7 +66,8 @@ namespace DnDV4.Data
                 Agility    =10, Agility_Max   =15, Agility_Corection    = 1, Dexterity_DiceRoll   =1,
                 Constitution = 6, Constitution_Max=11, Constitution_Corection =-4, Constitution_DiceRoll=1,
                 Intelligence =12, Intelligence_Max=17, Intelligence_Correction= 2, Intelligence_DiceRoll=1,
-                Charisma     = 8, Charisma_Max    =18, Charisma_Correction    = 2, Charisma_DiceRoll    =2  },
+                Charisma     = 8, Charisma_Max    =18, Charisma_Correction    = 2, Charisma_DiceRoll    =2,
+                ImagePath = "~/Images/Race/elf.jpeg"},
 
                 new (){
                 RaceName       ="Člověk",
@@ -74,7 +79,8 @@ namespace DnDV4.Data
                 Agility    = 9, Agility_Max   =14, Agility_Corection    = 0, Dexterity_DiceRoll   =1,
                 Constitution = 9, Constitution_Max=14, Constitution_Corection = 0, Constitution_DiceRoll=1,
                 Intelligence =10, Intelligence_Max=15, Intelligence_Correction= 0, Intelligence_DiceRoll=1,
-                Charisma     = 2, Charisma_Max    =17, Charisma_Correction    = 0, Charisma_DiceRoll    =3  },
+                Charisma     = 2, Charisma_Max    =17, Charisma_Correction    = 0, Charisma_DiceRoll    =3,
+                ImagePath = "~/Images/Race/clovek.jpeg"},
 
                 new (){
                 RaceName       ="Barbar",
@@ -86,7 +92,8 @@ namespace DnDV4.Data
                 Agility    = 8, Agility_Max   =13, Agility_Corection    =-1, Dexterity_DiceRoll   =1,
                 Constitution =11, Constitution_Max=16, Constitution_Corection = 1, Constitution_DiceRoll=1,
                 Intelligence = 6, Intelligence_Max=11, Intelligence_Correction= 0, Intelligence_DiceRoll=1,
-                Charisma     = 1, Charisma_Max    =16, Charisma_Correction    =-2, Charisma_DiceRoll    =3  },
+                Charisma     = 1, Charisma_Max    =16, Charisma_Correction    =-2, Charisma_DiceRoll    =3,
+                ImagePath = "~/Images/Race/barbar.jpeg"},
 
                 new (){
                 RaceName       ="Kroll",
@@ -98,7 +105,8 @@ namespace DnDV4.Data
                 Agility    = 5, Agility_Max   =10, Agility_Corection    =-4, Dexterity_DiceRoll   =1,
                 Constitution =13, Constitution_Max=18, Constitution_Corection = 3, Constitution_DiceRoll=1,
                 Intelligence = 2, Intelligence_Max= 7, Intelligence_Correction=-6, Intelligence_DiceRoll=1,
-                Charisma     = 1, Charisma_Max    =11, Charisma_Correction    =-5, Charisma_DiceRoll    =2  },
+                Charisma     = 1, Charisma_Max    =11, Charisma_Correction    =-5, Charisma_DiceRoll    =2,
+                ImagePath = "~/Images/Race/kroll.jpeg"},
             };
 
             context.Races.AddRange(race);

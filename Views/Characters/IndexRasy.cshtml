@@ -5,7 +5,6 @@
 }
 
 
-
 <table class="table characterCard">
     <thead>
         <tr>
@@ -18,10 +17,24 @@
                 @Html.DisplayNameFor(model => model.Strength)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Agility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Constitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intelligence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charisma)
+            </th>
+            <th>
                
             </th>
         </tr>
     </thead>
+
+ 
 
     
 
@@ -31,16 +44,30 @@
             <tr>
                 
                 <td>
-                    @Html.DisplayFor(modelItem => item.RaceName)
+                    <a asp-action="IndexPovolani" class="btn btn-dark"  asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.RaceName)</a>
+                </td>
+                <td>
+
+                    <img src="@Url.Content(@item.ImagePath)" width="100px" />
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Strength) - @Html.DisplayFor(modelItem => item.Strength_Max)
                 </td>
-
                 <td>
-                    <a asp-action="IndexPovolani" class="btn btn-dark" asp-route-id="@item.Id">Vyber</a>
+                    @Html.DisplayFor(modelItem => item.Agility) - @Html.DisplayFor(modelItem => item.Agility_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Constitution) - @Html.DisplayFor(modelItem => item.Constitution_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Intelligence) - @Html.DisplayFor(modelItem => item.Intelligence_Max)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Charisma) - @Html.DisplayFor(modelItem => item.Charisma_Max)
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

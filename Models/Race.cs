@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis.Elfie.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -72,6 +73,7 @@ namespace DnDV4.Models
         public int Intelligence_DiceRoll    { get { return DiceRoll(Intelligence, Intelligence_Max  ); } set { } }
         public int Charisma_DiceRoll        { get { return DiceRoll(Charisma,     Charisma_Max     ); } set { } }
 
+        public string ImagePath {  get; set; }
 
         protected int DiceRoll(int min,int max)
         {
