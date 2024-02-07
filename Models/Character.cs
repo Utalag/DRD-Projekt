@@ -37,42 +37,42 @@ namespace DnDV4.Models
         public int Strength_Max { get; set; }       // <- nastaví konroller
         [Display(Name = "Síla")]
         public int Strength_current { get; set; }
-        public int Strength_bonus { get { return atributBonus[Strength_current]; } set { } }
+        public int Strength_bonus { get { return AtributBonus[Strength_current]; } set { } }
 
         
         public int Agility { get; set; }            // <- nastaví konroller
         public int Agility_Max { get; set; }        // <- nastaví konroller
         [Display(Name = "Obratnost")]
         public int Agility_current {  get; set; }
-        public int Agility_bonus { get { return atributBonus[Agility_current]; } set { } }
+        public int Agility_bonus { get { return AtributBonus[Agility_current]; } set { } }
 
         
         public int Constitution { get; set; }       // <- nastaví konroller
         public int Constitution_Max { get; set; }   // <- nastaví konroller
         [Display(Name = "Odolnost")]
         public int Constitution_current {  get; set; }
-        public int Constitution_bonus { get { return atributBonus[Constitution_current]; } set { } }
+        public int Constitution_bonus { get { return AtributBonus[Constitution_current]; } set { } }
 
         
         public int Intelligence { get; set; }       // <- nastaví konroller
         public int Intelligence_Max { get; set; }   // <- nastaví konroller
         [Display(Name = "Inteligence")]
         public int Intelligence_current {  get; set; }
-        public int Intelligence_bonus { get { return atributBonus[Intelligence_current]; } set { } }
+        public int Intelligence_bonus { get { return AtributBonus[Intelligence_current]; } set { } }
 
        
         public int Charisma { get; set; }           // <- nastaví konroller
         public int Charisma_Max { get; set; }       // <- nastaví konroller
         [Display(Name = "Charisma")]
         public int Charisma_current {  get; set; }
-        public int Charisma_bonus {get { return atributBonus[Charisma_current]; }set { } }
+        public int Charisma_bonus {get { return AtributBonus[Charisma_current]; }set { } }
 
         // vypočítané hodnoty
 
         //pohyblivost
         [Display(Name = "Pohyblivost")]
         public int Mobility { get; set; }
-        public int Mobility_bonus { get { return atributBonus[Mobility]; } set { } }
+        public int Mobility_bonus { get { return AtributBonus[Mobility]; } set { } }
         //dovednostní body
         public int Strength_Skill_Points { get { return (5+(CharacterLevel/2))*Strength_current; } set { } }
         public int Agility_Skill_Points { get { return (5 + (CharacterLevel / 2)) * Agility_current; } set { } }
@@ -107,7 +107,7 @@ namespace DnDV4.Models
 
         //bonusy k atributem
         [NotMapped]
-        public Dictionary<int,int> atributBonus = new()
+        public static Dictionary<int,int> AtributBonus { get; set; } = new()
         {
             [0] = 0,
             [1] = 5,

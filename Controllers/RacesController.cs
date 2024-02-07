@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DnDV4.Data;
 using DnDV4.Models;
 
+
 namespace DnDV4.Controllers
 {
     public class RacesController : Controller
@@ -71,9 +72,10 @@ namespace DnDV4.Controllers
             "Intelligence,Intelligence_Max,Intelligence_Correction," +
             "Charisma,Charisma_Max,Charisma_Correction")] Race race)
         {
+
             if (ModelState.IsValid)
             {
-                _context.Add(race);
+                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

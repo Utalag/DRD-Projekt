@@ -173,13 +173,9 @@ namespace DnDV4.Controllers
         //-------------METODY---------------
 
 
-
-
         // GET: Index
         public async Task<IActionResult> Index(AtributEnum atribut,int? CharacterId)                                          
         {
-
-          
             var skillContext = _context.Skill.Include(c => c.SkillTable)
                 .Where(x => x.Atribut == atribut); // vypíše skilly podle předaného atributu
 
@@ -188,12 +184,8 @@ namespace DnDV4.Controllers
             ViewData["SkillPoint"] = MaxSkillPoint(atribut,CharacterId);
             ViewData["Count"] = ListPoints(atribut,CharacterId).Sum();
             ViewData["ListPoints"] = ListPoints(atribut,CharacterId);
-
-
             return View(await skillContext.ToListAsync());
         }
-
-
 
         // GET: Create
         public IActionResult Create(int? CharacterId,int? SkillId,int? SkillPoint,AtributEnum atribut) // <- předané parametry z IndexSkilll
@@ -218,8 +210,6 @@ namespace DnDV4.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int? CharacterId,int? SkillId,AtributEnum atribut,[Bind("Id,Rank,SkillPoint_curentValue,CharacterId,Atribut,SkillId")] CharacterSkill characterSkill)
         {
-            
-
             if(ModelState.IsValid)
             {
                 characterSkill.Dangerousness = _context.SkillTable.Where(x => x.Rank == characterSkill.Rank).Select(x=>x.Dangerousness).First();
@@ -232,8 +222,6 @@ namespace DnDV4.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index",new {atribut = atribut,CharacterId=CharacterId.Value });
             }
-
-
             return View(characterSkill);
         }
 
@@ -273,8 +261,6 @@ namespace DnDV4.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit([Bind("Id,Rank,SkillPoint_curentValue,CharacterId,Atribut,SkillId")] CharacterSkill characterSkill)
         {
-            
-
             if(ModelState.IsValid)
             {
                 characterSkill.Dangerousness = _context.SkillTable.Where(x => x.Rank == characterSkill.Rank).Select(x => x.Dangerousness).First();
@@ -282,19 +268,10 @@ namespace DnDV4.Controllers
 
                 _context.Update(characterSkill);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index",new { atribut = characterSkill.Atribut,CharacterId = characterSkill.CharacterId });
-                
+                return RedirectToAction("Index",new { atribut = characterSkill.Atribut,CharacterId = characterSkill.CharacterId });   
             }
-            
             return View(characterSkill);
         }
-
-
-
-
-
-
 
         // GET: CharacterSkills/Details/5
         public async Task<IActionResult> Details(int? CharacterId,int? SkillId)
@@ -314,7 +291,6 @@ namespace DnDV4.Controllers
         // GET: CharacterSkills/Delete/5
         public async Task<IActionResult> Delete(int? CharacterId,int? SkillId)
         {
-
             var ID = await _context.CharacterSkill
                 .Where(x => x.CharacterId == CharacterId)
                 .Where(x => x.SkillId == SkillId)
@@ -324,23 +300,18 @@ namespace DnDV4.Controllers
         }
 
 
-
-
         // POST: Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var characterSkill = await _context.CharacterSkill.FindAsync(id);
-
             AtributEnum atribut = characterSkill.Atribut;
             int CharacterId = characterSkill.CharacterId;
-
             if(characterSkill != null)
             {
                 _context.CharacterSkill.Remove(characterSkill);
             }
-
             await _context.SaveChangesAsync();
             return RedirectToAction("Index",new { atribut = atribut,CharacterId = CharacterId });
         }

@@ -46,9 +46,6 @@
                             foreach(var item in ViewBag.Dengerousness_Strength)
                             
                             {
-                                
-
-
                                 <li>
                                     <div class="dropdown">
                                         <button class=" dropdown-toggle " type="button"
@@ -311,83 +308,172 @@
             </div>
         </div>
 
-        <!--zbrane-->
+		<!--zbrane-->
         <div class="col-sm-6 col-xl-4 border ">
-            <h3>Zbraně + Inventář</h3>
-            <!--kontaktní zbraně-->
-            <div>
-                <table class="table">
-                    <thead>
-                        Kontaktní zbraně
-                        <tr>
-                            <th>Název</th>
-                            <th>Úč</th>
-                            <th>út</th>
-                            <th>Oč</th>
-                            <th>délka</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dlouhý meč</td>
-                            <td>15</td>
-                            <td>+21</td>
-                            <td>13</td>
-                            <td>sečná</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!--střelné zbraně-->
-            <div>
-                <table class="table">
-                    <thead>
-                        Střelné a vrhací zbraně
-                        <tr>
-                            <th>Název</th>
-                            <th>Úč</th>
-                            <th>út</th>
-                            <th colspan="3">Dostřel</th>
+            <a class="text-decoration-none btn btn-dark" asp-controller="CharacterWeapons" asp-action="Index"
+                           asp-route-CharacterId="@Model?.Id">Zbraň</a>
+            <h3>Zbraně</h3>
+            @{
+                foreach(var weaponClass in ViewBag.WeaponsFilterClass)
+                {
+                    switch(weaponClass)
+                    {
+                        //jednoruční
+                        case WeaponClassEnum.oneHanded:
+                        {
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        Jednoruční zbraně
+                                        <tr>
+                                            <th>Jmeno</th>
+                                            <th>Úč</th>
+                                            <th>út</th>
+                                            <th>Oč</th>
+                                            <th>ini</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach(var item in ViewBag.WeaponsList)
+                                            {
+                                                if(item.Weapon.ClassWeapon == WeaponClassEnum.oneHanded)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Weapon.NameWeapon</td>
+                                                        <td>@item.AtackNr</td>
+                                                        <td>@item.DemageNr</td>
+                                                        <td>@item.DefenseNr</td>
+                                                        <td>@item.Weapon.InitiativeWeapon</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        break;
+                        //obouruční
+                        case WeaponClassEnum.twoHanded:
+                        {
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        Obouruční zbraně
+                                        <tr>
+                                            <th>Jmeno</th>
+                                            <th>Úč</th>
+                                            <th>út</th>
+                                            <th>Oč</th>
+                                            <th>ini</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach(var item in ViewBag.WeaponsList)
+                                            {
+                                                if(item.Weapon.ClassWeapon == WeaponClassEnum.twoHanded)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Weapon.NameWeapon</td>
+                                                        <td>@item.AtackNr</td>
+                                                        <td>@item.DemageNr</td>
+                                                        <td>@item.DefenseNr</td>
+                                                        <td>@item.Weapon.InitiativeWeapon</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        break;
+                        //střelné vrhcí
+                        case WeaponClassEnum.firearm:
+                        case WeaponClassEnum.throwing:
+                        {
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        Střelné a vrhací zbraně
+                                        <tr>
+                                            <th>Název</th>
+                                            <th>Úč</th>
+                                            <th>út</th>
+                                            <th colspan="3">Dostřel</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>kuš</td>
-                            <td>10</td>
-                            <td>+1</td>
-                            <td>10</td>
-                            <td>20</td>
-                            <td>50</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach(var item in ViewBag.WeaponsList)
+                                            {
+                                                if(item.Weapon.ClassWeapon == WeaponClassEnum.firearm || item.Weapon.ClassWeapon == WeaponClassEnum.throwing)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Weapon.NameWeapon</td>
+                                                        <td>@item.AtackNr</td>
+                                                        <td>@item.DemageNr</td>
+                                                        <td>@item.Weapon.MinGunshot</td>
+                                                        <td>@item.Weapon.MiddleGunshot</td>
+                                                        <td>@item.Weapon.MaxGunshot</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        break;
+                        //boj beze zbraně
+                        case WeaponClassEnum.contact:
+                        {
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        Boj beze zbraně
+                                        <tr>
+                                            <th>Jmeno</th>
+                                            <th>Úč</th>
+                                            <th>út</th>
+                                            <th>Oč</th>
+                                            <th>ini</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach(var item in ViewBag.WeaponsList)
+                                            {
+                                                if(item.Weapon.ClassWeapon == WeaponClassEnum.contact)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Weapon.NameWeapon</td>
+                                                        <td>@item.AtackNr</td>
+                                                        <td>@item.DemageNr</td>
+                                                        <td>@item.DefenseNr</td>
+                                                        <td>@item.Weapon.InitiativeWeapon</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        }
+                        break;
 
-            <!--Boj beze zbraně-->
-            <div>
-                <table class="table">
-                    <thead>
-                        <button>Boj beze zbraně</button>
-                        <tr>
-                            <th>Název</th>
-                            <th>Úč</th>
-                            <th>út</th>
-                            <th>Oč</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>pěst</td>
-                            <td>9</td>
-                            <td>+17</td>
-                            <td>12</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                        default:
+                        {}
+                        break;
+                    }
+                }
+            }         
         </div>
+   
+        
 
 
         <div class="col-sm-12 col-xl-4 border ">
@@ -396,4 +482,3 @@
         </div>
     </div>
 </div>
-

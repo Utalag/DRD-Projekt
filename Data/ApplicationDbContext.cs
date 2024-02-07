@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+
 using DnDV4.Models;
 namespace DnDV4.Data
 {
@@ -18,7 +20,14 @@ namespace DnDV4.Data
         }
         public DbSet<DnDV4.Models.CharacterSkill> CharacterSkill { get; set; } = default!;
         public DbSet<DnDV4.Models.Weapon> Weapon { get; set; } = default!;
+        public DbSet<DnDV4.Models.CharacterWeapon> CharacterWeapon { get; set; } = default!;
 
+        // logovani SQL dotazu
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.LogTo(text => System.Diagnostics.Debug.WriteLine(text),LogLevel.Information);
+        //}
+        
     }
 }
 

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DnDV4.Models.CharacterWeapon>
+
+@{
+    ViewData["Title"] = "Moje zbraně";
+}
+
+
+<p>
+    <a asp-action="Create" class="text-decoration-none btn btn-primary btn-outline-dark  " asp-route-CharacterId=@ViewBag.CharacterId>Vyber si novou zbraň</a>
+</p>
+<table class="table characterCard">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon)
+            </th>
+            <th>
+                Uč+ut+Oč
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon.ClassWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon.TypeWeapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon.SizeWeapon)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weapon.NameWeapon)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.AtackNr)+@Html.DisplayFor(modelItem => item.DemageNr)+@Html.DisplayFor(modelItem => item.DefenseNr)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weapon.ClassWeapon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weapon.TypeWeapon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weapon.SizeWeapon)
+                </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a asp-action="Denik" asp-controller="Characters" class="text-decoration-none btn btn-danger btn-outline-dark" asp-route-Id=@ViewBag.CharacterId>Zpět do deníku</a>
+</p>

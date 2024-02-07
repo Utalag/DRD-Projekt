@@ -3,180 +3,137 @@ using DnDV4.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.Identity.Client;
+using System.Diagnostics;
+using System.Drawing.Text;
+using System.Linq;
 
 namespace DnDV4.Controllers
 {
     public class CharactersController(ApplicationDbContext context) : Controller
     {
+        //---METODY--
+        public int AtributValue(int rasaAtribut,int atributProfession,int raceCorrection)
+        {
+            if(atributProfession.Equals(null))
+                atributProfession = 0;
+            if(rasaAtribut.Equals(null))
+                rasaAtribut = 0;
+            if(raceCorrection.Equals(null))
+                rasaAtribut = 0;
 
-
-
-
-
+            return (rasaAtribut < atributProfession + raceCorrection) ? atributProfession + raceCorrection : rasaAtribut;
+        }
+        //----------
 
         // GET: výpis všech postav
         public async Task<IActionResult> Index()
         {
-
             var applicationDbContext = context.Character.Include(c => c.Race).Include(c => c.Profession);
             return View(await applicationDbContext.ToListAsync());
         }
-
-
 
         // GET: vyber Rasy
         public async Task<IActionResult> IndexRasy()
         {
             return View(await context.Races.ToListAsync());
         }
+
         // GET: vyber Povolani
         public async Task<IActionResult> IndexPovolani(int? id)
         {
             ViewBag.idRasy = id; // pro vložení do dalšího parametru
-
-            var rasa = context.Races.Find(id);
-
-            // porovnání atributú rasy a povolání
-            foreach(var item in context.Profession)
-            {
-                int SilProfMin = item.Strength + rasa.Strength_Corection;
-                int ObrProfMin = item.Agility + rasa.Agility_Corection;
-                int OdolProfMin = item.Constitution + rasa.Constitution_Corection;
-                int IntProfMin = item.Intelligence + rasa.Intelligence_Correction;
-                int ChProfMin = item.Charisma + rasa.Charisma_Correction;
-
-                item.Strength = (rasa.Strength < SilProfMin) ? SilProfMin : rasa.Strength;
-                item.Agility = (rasa.Agility < ObrProfMin) ? ObrProfMin : rasa.Agility;
-                item.Constitution = (rasa.Constitution < OdolProfMin) ? OdolProfMin : rasa.Constitution;
-                item.Intelligence = (rasa.Intelligence < IntProfMin) ? IntProfMin : rasa.Intelligence;
-                item.Charisma = (rasa.Charisma < ChProfMin) ? ChProfMin : rasa.Charisma;
-
-                int SilProfMax = item.Strength_Max + rasa.Strength_Corection;
-                int ObrProfMax = item.Agility_Max + rasa.Agility_Corection;
-                int OdolProfMax = item.Constitution_Max + rasa.Constitution_Corection;
-                int IntProfMax = item.Intelligence_Max + rasa.Intelligence_Correction;
-                int ChProfMax = item.Charisma_Max + rasa.Charisma_Correction;
-
-                item.Strength_Max = (rasa.Strength_Max < SilProfMax) ? SilProfMax : rasa.Strength_Max;
-                item.Agility_Max = (rasa.Agility_Max < ObrProfMax) ? ObrProfMax : rasa.Agility_Max;
-                item.Constitution_Max = (rasa.Constitution_Max < OdolProfMax) ? OdolProfMax : rasa.Constitution_Max;
-                item.Intelligence_Max = (rasa.Intelligence_Max < IntProfMax) ? IntProfMax : rasa.Intelligence_Max;
-                item.Charisma_Max = (rasa.Charisma_Max < ChProfMax) ? ChProfMax : rasa.Charisma_Max;
-            }
-
             return View(await context.Profession.ToListAsync());
-
         }
-
-
+        
         // GET: Create
         public IActionResult Create(int? idRace,int? idProfession)
         {
-
-            var valueProfession = context.Profession.Find(idProfession); // Finf -> vybírá jedne záznam podle primárního klíče
-            var valueRace = context.Races.Find(idRace);
-
-            int SilProfMin = valueProfession.Strength + valueRace.Strength_Corection;
-            int ObrProfMin = valueProfession.Agility + valueRace.Agility_Corection;
-            int OdolProfMin = valueProfession.Constitution + valueRace.Constitution_Corection;
-            int IntProfMin = valueProfession.Intelligence + valueRace.Intelligence_Correction;
-            int ChProfMin = valueProfession.Charisma + valueRace.Charisma_Correction;
-
-            int SilProfMax = valueProfession.Strength_Max + valueRace.Strength_Corection;
-            int ObrProfMax = valueProfession.Agility_Max + valueRace.Agility_Corection;
-            int OdolProfMax = valueProfession.Constitution_Max + valueRace.Constitution_Corection;
-            int IntProfMax = valueProfession.Intelligence_Max + valueRace.Intelligence_Correction;
-            int ChProfMax = valueProfession.Charisma_Max + valueRace.Charisma_Correction;
-
+            var profession = context.Profession.Find(idProfession); // Find -> vybírá jeden záznam podle primárního klíče
+            var race = context.Races.Find(idRace);
+            if(race == null)
+            {
+                return NotFound();
+            }
+            if(profession == null)
+            {
+                return NotFound();
+            }
             ViewBag.RaceId = idRace;
             ViewBag.ProfessionId = idProfession;
-            ViewBag.Race = valueRace.RaceName;
-            ViewBag.Profession = valueProfession.Name;
+            ViewBag.Race = race.RaceName;
+            ViewBag.Profession = profession.Name;
+            int AtributValue(int rasaAtribut,int atributProfession,int raceCorrection)
+            {
+                if(atributProfession.Equals(null))
+                    atributProfession = 0;
+                if(rasaAtribut.Equals(null))
+                    rasaAtribut = 0;
+                if(raceCorrection.Equals(null))
+                    rasaAtribut = 0;
 
-            ViewBag.Sila = (valueRace.Strength < SilProfMin) ? SilProfMin : valueRace.Strength;
-            ViewBag.Obratnost = (valueRace.Agility < ObrProfMin) ? ObrProfMin : valueRace.Agility;
-            ViewBag.Odolnost = (valueRace.Constitution < OdolProfMin) ? OdolProfMin : valueRace.Constitution;
-            ViewBag.Inteligence = (valueRace.Intelligence < IntProfMin) ? IntProfMin : valueRace.Intelligence;
-            ViewBag.Charisma = (valueRace.Charisma < ChProfMin) ? ChProfMin : valueRace.Charisma;
-
-            ViewBag.SilaMax = (valueRace.Strength_Max < SilProfMax) ? SilProfMax : valueRace.Strength_Max;
-            ViewBag.ObratnostMax = (valueRace.Agility_Max < ObrProfMax) ? ObrProfMax : valueRace.Agility_Max;
-            ViewBag.OdolnostMax = (valueRace.Constitution_Max < OdolProfMax) ? OdolProfMax : valueRace.Constitution_Max;
-            ViewBag.InteligenceMax = (valueRace.Intelligence_Max < IntProfMax) ? IntProfMax : valueRace.Intelligence_Max;
-            ViewBag.CharismaMax = (valueRace.Charisma_Max < ChProfMax) ? ChProfMax : valueRace.Charisma_Max;
-
+                return (rasaAtribut < atributProfession + raceCorrection) ? atributProfession + raceCorrection : rasaAtribut;
+            }
+            ViewBag.Sila = AtributValue(race.Strength,profession.Strength,race.Strength_Corection);
+            ViewBag.Obratnost = AtributValue(race.Agility,profession.Agility,race.Agility_Corection);
+            ViewBag.Odolnost = AtributValue(race.Constitution,profession.Constitution,race.Constitution_Corection);
+            ViewBag.Inteligence = AtributValue(race.Intelligence,profession.Intelligence,race.Intelligence_Correction);
+            ViewBag.Charisma = AtributValue(race.Charisma,profession.Charisma,race.Charisma_Correction);
+            ViewBag.SilaMax = AtributValue(race.Strength_Max,profession.Strength_Max,race.Strength_Corection);
+            ViewBag.ObratnostMax = AtributValue(race.Agility_Max,profession.Agility_Max,race.Agility_Corection);
+            ViewBag.OdolnostMax = AtributValue(race.Constitution_Max,profession.Constitution_Max,race.Constitution_Corection);
+            ViewBag.InteligenceMax = AtributValue(race.Intelligence_Max,profession.Intelligence_Max,race.Intelligence_Correction);
+            ViewBag.CharismaMax = AtributValue(race.Charisma_Max,profession.Charisma_Max,race.Charisma_Correction);
             return View();
         }
-
 
         // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProfessionId,RaceId,CharacterName,CharacterLevel,CharacterOrigin," +
-            "Strength_current,Agility_current,Constitution_current,Intelligence_current,Charisma_current")] Character character)
+        public async Task<IActionResult> Create([Bind("Id,ProfessionId,RaceId,CharacterName,CharacterLevel,CharacterOrigin,Strength_current,Agility_current,Constitution_current,Intelligence_current,Charisma_current")] Character character)
         {
             if(ModelState.IsValid)
             {
-
-                var valueProfession = context.Profession.Find(character.ProfessionId); // Finf -> vybírá jedne záznam podle primárního klíče
-                var valueRace = context.Races.Find(character.RaceId);
-
-                int SilProfMin = valueProfession.Strength + valueRace.Strength_Corection;
-                int ObrProfMin = valueProfession.Agility + valueRace.Agility_Corection;
-                int OdolProfMin = valueProfession.Constitution + valueRace.Constitution_Corection;
-                int IntProfMin = valueProfession.Intelligence + valueRace.Intelligence_Correction;
-                int ChProfMin = valueProfession.Charisma + valueRace.Charisma_Correction;
-
-                int SilProfMax = valueProfession.Strength_Max + valueRace.Strength_Corection;
-                int ObrProfMax = valueProfession.Agility_Max + valueRace.Agility_Corection;
-                int OdolProfMax = valueProfession.Constitution_Max + valueRace.Constitution_Corection;
-                int IntProfMax = valueProfession.Intelligence_Max + valueRace.Intelligence_Correction;
-                int ChProfMax = valueProfession.Charisma_Max + valueRace.Charisma_Correction;
-
-                //atributy min
-                character.Strength = (valueRace.Strength < SilProfMin) ? SilProfMin : valueRace.Strength;
-                character.Agility = (valueRace.Agility < ObrProfMin) ? ObrProfMin : valueRace.Agility;
-                character.Constitution = (valueRace.Constitution < OdolProfMin) ? OdolProfMin : valueRace.Constitution;
-                character.Intelligence = (valueRace.Intelligence < IntProfMin) ? IntProfMin : valueRace.Intelligence;
-                character.Charisma = (valueRace.Charisma < ChProfMin) ? ChProfMin : valueRace.Charisma;
-                //atributy max
-                character.Strength_Max = (valueRace.Strength_Max < SilProfMax) ? SilProfMax : valueRace.Strength_Max;
-                character.Agility_Max = (valueRace.Agility_Max < ObrProfMax) ? ObrProfMax : valueRace.Agility_Max;
-                character.Constitution_Max = (valueRace.Constitution_Max < OdolProfMax) ? OdolProfMax : valueRace.Constitution_Max;
-                character.Intelligence_Max = (valueRace.Intelligence_Max < IntProfMax) ? IntProfMax : valueRace.Intelligence_Max;
-                character.Charisma_Max = (valueRace.Charisma_Max < ChProfMax) ? ChProfMax : valueRace.Charisma_Max;
+                var profession = context.Profession.Find(character.ProfessionId); // Finf -> vybírá jedne záznam podle primárního klíče
+                var race = context.Races.Find(character.RaceId);
+                if(race == null)
+                {
+                    return NotFound();
+                }
+                if(profession == null)
+                {
+                    return NotFound();
+                }
+                // min hodnoty
+                character.Strength = AtributValue(race.Strength,profession.Strength,race.Strength_Corection);
+                character.Agility = AtributValue(race.Agility,profession.Agility,race.Agility_Corection);
+                character.Constitution = AtributValue(race.Constitution,profession.Constitution,race.Constitution_Corection);
+                character.Intelligence = AtributValue(race.Intelligence,profession.Intelligence,race.Intelligence_Correction);
+                character.Charisma = AtributValue(race.Charisma,profession.Charisma,race.Charisma_Correction);
+                // max hodnoty
+                character.Strength_Max = AtributValue(race.Strength_Max,profession.Strength_Max,race.Strength_Corection);
+                character.Agility_Max = AtributValue(race.Agility_Max,profession.Agility_Max,race.Agility_Corection);
+                character.Constitution_Max = AtributValue(race.Constitution_Max,profession.Constitution_Max,race.Constitution_Corection);
+                character.Intelligence_Max = AtributValue(race.Intelligence_Max,profession.Intelligence_Max,race.Intelligence_Correction);
+                character.Charisma_Max = AtributValue(race.Charisma_Max,profession.Charisma_Max,race.Charisma_Correction);
                 // Hp
-                character.Hp = valueProfession.Hp + valueProfession.HpBonus + character.Constitution_bonus;
+                character.Hp = profession.Hp + profession.HpBonus + character.Constitution_bonus;
                 //pohyblivost
-                character.Mobility = valueRace.Mobility + character.Strength_bonus * 2 + character.Agility_bonus;
-
-
+                character.Mobility = race.Mobility + character.Strength_bonus * 2 + character.Agility_bonus;
 
                 context.Add(character);
                 await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-
             return View(character);
-
         }
 
 
         // GET: Deník
         public async Task<IActionResult> Denik(int? id)
         {
-            List<CharacterSkill> DangerousnessSkill( AtributEnum atribut)
-            {
-                return  context.CharacterSkill
-                        .Include(x => x.Skill)
-                        .Where(x => x.CharacterId == id).ToList()
-                        .Where(x => x.Atribut == atribut).ToList(); 
-            }
-
-           
-
-            if(id == null)
+                if(id == null)
             {
                 return NotFound();
             }
@@ -185,15 +142,37 @@ namespace DnDV4.Controllers
                 .Include(c => c.Race)
                 .Include(c => c.Profession)
                 .Include(c => c.CharacterSkill)
+                .Include(c => c.CharacterWeapon)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            ViewData["Dengerousness_Strength"] = DangerousnessSkill(AtributEnum.strength);
+            List<CharacterSkill> DangerousnessSkill(AtributEnum atribut)
+            {
+                return context.CharacterSkill
+                        .Include(x => x.Skill)
+                        .Where(x => x.CharacterId == id).ToList()
+                        .Where(x => x.Atribut == atribut).ToList();
+            }
+            //--- testovani---
+            var xxx= context.CharacterWeapon.Include(x=>x.Weapon).Where(x => x.CharacterID == id).ToList();
+            foreach(var item in xxx)
+            {
+                string ccc = item.Weapon.NameWeapon;
+                int? sz = item.Weapon.MinGunshot;
+                int ut = item.DemageNr;
+                int oc = item.DefenseNr;
+                int delka = item.Weapon.InitiativeWeapon;
+            }
+                //-------
+            ViewData["WeaponsList"] = context.CharacterWeapon.Where(x => x.CharacterID == id).ToList();
+			ViewData["WeaponsFilterClass"] = context.CharacterWeapon.Where(x => x.CharacterID == id).Select(x=>x.Weapon.ClassWeapon).OrderBy(x=>x).ToList().Distinct();
+
+			ViewData["Dengerousness_Strength"] = DangerousnessSkill(AtributEnum.strength);
             ViewData["Dengerousness_Agility"] = DangerousnessSkill(AtributEnum.agility);
             ViewData["Dengerousness_Constitution"] = DangerousnessSkill(AtributEnum.constitution);
             ViewData["Dengerousness_Intelligence"] = DangerousnessSkill(AtributEnum.intelligence);
             ViewData["Dengerousness_Charisma"] = DangerousnessSkill(AtributEnum.charisma);
             ViewData["Dengerousness_Mobility"] = DangerousnessSkill(AtributEnum.mobility);
-            ViewData["Weapon"] = context.Weapon;
+            
 
             if(character == null)
             {
@@ -202,47 +181,6 @@ namespace DnDV4.Controllers
 
             return View(character);
         }
-
-
-        //// GET: Výběr dovednosti
-        //public async Task<IActionResult> IndexSkills(AtributEnum atribut,int? Id,int? skillPoint)
-        //{
-
-
-
-
-        //    var skillContext = context.Skill.Include(c => c.SkillTable)
-        //        .Where(x => x.Atribut == atribut);                    // vypíše skilly podle předaného atributu
-
-
-        //    int sumSkillPointForAtribute = 0;    // součet bodů u dané dovednosti
-
-
-        //    foreach(var skill in skillContext)  // prohledání všech skillů v dané dovednosti a jejich součet 
-        //    {
-        //        var sumCurrent = context.CharacterSkill.
-        //            Where(x => x.SkillId == skill.Id)   // id skilu == 
-        //            .Sum(x => x.SkillPoint_curentValue);
-        //        sumSkillPointForAtribute += sumCurrent;
-
-        //        ViewBag.CurrentSkillPoint = sumCurrent;
-        //    }
-
-
-        //    int sumSkillPoint = sumSkillPointForAtribute; // mezikrok - součet do čistého int 
-
-        //    ViewBag.CharacterId = Id;                           // 
-        //    ViewBag.SkillPoint = skillPoint - sumSkillPoint;
-        //    ViewBag.Test = sumSkillPoint;
-
-
-
-
-        //    return View(await skillContext.ToListAsync());
-        //}
-
-
-
 
         // GET: Characters/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -257,16 +195,13 @@ namespace DnDV4.Controllers
             {
                 return NotFound();
             }
-            //ViewData["RaceId"] = new SelectList(_context.Races, "Id","RaceName", character.RaceId);
-            //ViewData["RaceId"] = _context.Races.Where(r => r.Id == idRasy).Select(x=>x.RaceName).ToList();
-            //ViewData["SubProfessionId"] = new SelectList(_context.SubProfession, "Id","NazevSubPovolani", character.ProfessionId);
             return View(character);
         }
 
         // POST: Characters/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,[Bind("Id,SubProfessionId,RaceId,CharacterName,CharacterLevel,PuvodPostavy,Sila,Obratnost,Odolnost,Inteligence,Charisma")] Character character)
+        public async Task<IActionResult> Edit(int id,[Bind("Id,ProfessionId,RaceId,CharacterName,CharacterLevel,CharacterOrigin,Strength_current,Agility_current,Constitution_current,Intelligence_current,Charisma_current")] Character character)
         {
             if(id != character.Id)
             {
@@ -297,8 +232,6 @@ namespace DnDV4.Controllers
 
             return View(character);
         }
-
-
 
 
         // GET: Characters/Delete/5
@@ -335,8 +268,6 @@ namespace DnDV4.Controllers
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-
 
         private bool CharacterExists(int id)
         {

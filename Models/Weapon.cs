@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using DnDV4.Migrations;
+using Microsoft.AspNetCore.Cors;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text.RegularExpressions;
+
 
 namespace DnDV4.Models
 {
     public class Weapon
     {
-        
-
         public int Id { get; set; }
 
         public List<CharacterWeapon> CharacterWeapon { get; set; } = new();
@@ -98,19 +101,6 @@ namespace DnDV4.Models
 
         [Display(Name = "Maximální dostřel:")]
         [Range(0,200,ErrorMessage = "0 až 200")]
-        public int? MaxGunshot { get; set; }
-
-
-    }
-
-
-    public class CharacterWeapon()
-    {
-        public int Id { get; set; }
-        public int CharacterID { get; set; }
-        public int WeaponId { get; set; }
-
-        public Weapon? Weapon { get; set; }
-        public Character? Character { get; set; }
-    }
+        public int? MaxGunshot { get; set; } 
+    } 
 }
