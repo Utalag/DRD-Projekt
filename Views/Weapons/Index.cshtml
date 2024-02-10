@@ -1,155 +1,92 @@
 ﻿@model IEnumerable<DnDV4.Models.Weapon>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Zbraňe";
 }
 
-<h1>Index</h1>
+
 
 <div>
     <a asp-action="Create" class="text-decoration-none btn btn-dark">Vytvoř novou zbraň</a>
 </div>
-<table class="table characterCard">
+<table class="table characterCard flex-nowrap">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NameWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NickName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SZ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UT)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OZ)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClassWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SizeWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TypeWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ManufacturerBonus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Metal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Demon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinimalControllability)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ControlAttribute)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LengthWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WeightWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InitiativeWeapon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinGunshot)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MiddleGunshot)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxGunshot)
-            </th>
             <th></th>
+            <th>
+				Popis
+            </th>
+            <th>
+                Hodnty
+            </th>
+            <th>
+                Ovladatelnost
+            </th>
+            <th>
+                Kovářství
+            </th>
+            <th>
+                Váha/Cana
+            </th>
+            <th>
+                Třídy
+            </th>
+            <th>
+                Dostřel M/S/D
+            </th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NickName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SZ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UT)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OZ)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClassWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SizeWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManufacturerBonus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Metal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Demon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinimalControllability)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ControlAttribute)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LengthWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WeightWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InitiativeWeapon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinGunshot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MiddleGunshot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaxGunshot)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+            <tr>
+				<td>
+					<button class="btn-group-vertical btn btn-light ">
+                        <a class="text-black text-decoration-none " asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="text-black text-decoration-none " asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="text-black text-decoration-none " asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+					</button>
+                    
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.NameWeapon)</p>
+                    <p>@Html.DisplayFor(modelItem => item.NickName)</p>
+                </td>
+
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.SZ) + @Html.DisplayFor(modelItem => item.UT) + @Html.DisplayFor(modelItem => item.OZ)</p>
+                    <p>ini :@Html.DisplayFor(modelItem => item.InitiativeWeapon) </p>
+                    <p>Délka zbraně: @Html.DisplayFor(modelItem => item.LengthWeapon)</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.ControlAttribute)</p>
+                    <p>Min: @Html.DisplayFor(modelItem => item.MinimalControllability)</p>
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.Manufacturer)</p>
+                    <p>@Html.DisplayFor(modelItem => item.ManufacturerBonus)</p>
+                    <p>@Html.DisplayFor(modelItem => item.Metal)</p>
+
+                </td>
+                <td>
+                    <p>Cena: @Html.DisplayFor(modelItem => item.Price)</p>
+                    <p>Váha: @Html.DisplayFor(modelItem => item.WeightWeapon)</p>
+
+                </td>
+                <td>
+                    <p>@Html.DisplayFor(modelItem => item.ClassWeapon)</p>
+                    <p>@Html.DisplayFor(modelItem => item.SizeWeapon)</p>
+                    <p>@Html.DisplayFor(modelItem => item.TypeWeapon)</p>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MinGunshot)/@Html.DisplayFor(modelItem => item.MiddleGunshot)/@Html.DisplayFor(modelItem => item.MaxGunshot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Demon)
+                </td>
+
+            </tr>
 }
     </tbody>
 </table>

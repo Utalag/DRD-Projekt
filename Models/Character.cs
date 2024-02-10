@@ -86,6 +86,7 @@ namespace DnDV4.Models
         public int Intelligence_Skill_Points_current { get; set; }
         public int Charisma_Skill_Points_current     { get; set; }
         //životy na 1. urovni
+        [Display(Name ="Životy")]
         public int Hp { get; set; }                 // !!!doplnit logiku
 
 

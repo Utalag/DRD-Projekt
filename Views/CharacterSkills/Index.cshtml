@@ -1,90 +1,84 @@
-﻿
-@model IEnumerable<DnDV4.Models.Skill>
+﻿@model IEnumerable<DnDV4.Models.Skill>
 
 
 <h1 class="text-center">Seznam dovedností</h1>
-<h4 class="text-center">Využito: @ViewBag.Count z @ViewBag.SkillPoint </h4>
+
 
 
 
 <div class="row justify-content-center">
-
+    <h4 class="text-center characterCard">Využito: @ViewBag.Count z @ViewBag.SkillPoint </h4>
     @{
         int index = 0;
         foreach(var item in Model)
         {
-
             int distinct = @ViewBag.SkillPoint - @ViewBag.Count;
-
-            <div class="col-sm-3" >
-                <div class="card  btn-outline-dark align-items-center bg-secondary">
-                    
+            <div class="col-sm-3 characterCard  align-items-center">
+                <div class="row">
                     <a asp-action="Details"
-                       class="btn btn-info "
-                       asp-route-SkillId="@item.Id"
-                       asp-route-CharacterId="@ViewBag.CharacterId">
-                        Popis 
+                            class="btn btn-info "
+                            asp-route-SkillId="@item.Id"
+                            asp-route-CharacterId="@ViewBag.CharacterId">
+                        Popis
                     </a>
+                </div>
 
-                    <div class="card-body ">
-                        <h4 class="card-title">@item.Name (@ViewBag.ListPoints[index])</h4>
+                <div class="card-body align-items-center ">
+                    <h4 class="card-title text-center">@item.Name (@ViewBag.ListPoints[index])</h4>
 
-                        <p class="card-text">Náročnost: @item.Seriousness</p>
+                    <p class="card-text text-center">Náročnost: @item.Seriousness</p>
 
-                        @if(@ViewBag.ListPoints[index] == null || @ViewBag.ListPoints[index] == 0)
-                        {
-                            
-                                <a asp-action="Create"
-                               class="btn btn-primary btn-block"
+                    @if(@ViewBag.ListPoints[index] == null || @ViewBag.ListPoints[index] == 0)
+                    {
+                        <div class=" text-center">
+							<a asp-action="Create"
+							   class="text-decoration-none text-uppercase fw-bold text-dark "
+							   asp-route-SkillId="@item.Id"
+							   asp-route-CharacterId="@ViewBag.CharacterId"
+							   asp-route-SkillPoint="@distinct"
+							   asp-route-Atribut="@ViewBag.Atribut">
+								Vyber
+							</a>
+                        </div>
+                        
+
+                    }
+                    else
+                    {
+                        <div class=" row ">
+                            <div class="col">
+                                <a asp-action="Edit"
+                                   class="text-decoration-none text-uppercase fw-bold text-dark "
                                    asp-route-SkillId="@item.Id"
-                                   asp-route-CharacterId="@ViewBag.CharacterId"
-                                   asp-route-SkillPoint="@distinct"
-                                   asp-route-Atribut="@ViewBag.Atribut">
-                                   Vyber
+                                   asp-route-CharacterId="@ViewBag.CharacterId">
+                                    Uprav
                                 </a>
-                            
-                        }
-                        else
-                        {
-                            <div class="btn-group">
-                                
-                                    <a asp-action="Edit"
-                                       class="btn btn-success"
-                                       asp-route-SkillId="@item.Id"
-                                       asp-route-CharacterId="@ViewBag.CharacterId">
-                                       Uprav
-                                    </a>
-                               
-
-
-                               
-                                    <a asp-action="Delete"
-                                    class="btn btn-danger"
-                                       asp-route-SkillId="@item.Id"
-                                       asp-route-CharacterId="@ViewBag.CharacterId">
-                                       Zapomeň
-                                    </a>
-                                
                             </div>
-                            
+                            <div class="col">
+                                <a asp-action="Delete"
+                                   class="text-decoration-none text-uppercase fw-bold text-dark "
+                                   asp-route-SkillId="@item.Id"
+                                   asp-route-CharacterId="@ViewBag.CharacterId">
+                                    Zapomeň
+                                </a>
+                            </div>
+
+                        </div>
 
 
-                        }
 
-                    </div>
-
-
+                    }
                 </div>
             </div>
             index++;
         }
     }
+    <a class="text-decoration-none text-uppercase fw-bold text-dark bg-light btn"
+       asp-controller="Characters"
+       asp-action="Denik"
+       asp-route-id=@ViewBag.CharacterId>
+        Zpět na deník
+    </a>
 </div>
 
-<a 
-   class="btn btn-info "
-   asp-controller ="Characters"
-   asp-action="Denik"
-   asp-route-id=@ViewBag.CharacterId>
-    Zpět na deník
-</a>
+

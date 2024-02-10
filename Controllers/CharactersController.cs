@@ -1,13 +1,7 @@
 ﻿using DnDV4.Data;
 using DnDV4.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.Identity.Client;
-using System.Diagnostics;
-using System.Drawing.Text;
-using System.Linq;
 
 namespace DnDV4.Controllers
 {
@@ -46,9 +40,9 @@ namespace DnDV4.Controllers
             ViewBag.idRasy = id; // pro vložení do dalšího parametru
             return View(await context.Profession.ToListAsync());
         }
-        
+
         // GET: Create
-        public IActionResult Create(int? idRace,int? idProfession)
+        public IActionResult Create(int idRace,int idProfession)
         {
             var profession = context.Profession.Find(idProfession); // Find -> vybírá jeden záznam podle primárního klíče
             var race = context.Races.Find(idRace);
@@ -60,10 +54,25 @@ namespace DnDV4.Controllers
             {
                 return NotFound();
             }
-            ViewBag.RaceId = idRace;
-            ViewBag.ProfessionId = idProfession;
-            ViewBag.Race = race.RaceName;
-            ViewBag.Profession = profession.Name;
+
+            Character character = new Character()
+            {
+                RaceId = idRace,
+                ProfessionId = idProfession,
+                Race = race,
+                Profession = profession,
+                Strength = AtributValue(race.Strength,profession.Strength,race.Strength_Corection),
+                Agility = AtributValue(race.Agility,profession.Agility,race.Agility_Corection),
+                Constitution = AtributValue(race.Constitution,profession.Constitution,race.Constitution_Corection),
+                Intelligence = AtributValue(race.Intelligence,profession.Intelligence,race.Intelligence_Correction),
+                Charisma = AtributValue(race.Charisma,profession.Charisma,race.Charisma_Correction),
+                Strength_Max = AtributValue(race.Strength_Max,profession.Strength_Max,race.Strength_Corection),
+                Agility_Max = AtributValue(race.Agility_Max,profession.Agility_Max,race.Agility_Corection),
+                Constitution_Max = AtributValue(race.Constitution_Max,profession.Constitution_Max,race.Constitution_Corection),
+                Intelligence_Max = AtributValue(race.Intelligence_Max,profession.Intelligence_Max,race.Intelligence_Correction),
+                Charisma_Max = AtributValue(race.Charisma_Max,profession.Charisma_Max,race.Charisma_Correction)
+            };
+
             int AtributValue(int rasaAtribut,int atributProfession,int raceCorrection)
             {
                 if(atributProfession.Equals(null))
@@ -75,17 +84,8 @@ namespace DnDV4.Controllers
 
                 return (rasaAtribut < atributProfession + raceCorrection) ? atributProfession + raceCorrection : rasaAtribut;
             }
-            ViewBag.Sila = AtributValue(race.Strength,profession.Strength,race.Strength_Corection);
-            ViewBag.Obratnost = AtributValue(race.Agility,profession.Agility,race.Agility_Corection);
-            ViewBag.Odolnost = AtributValue(race.Constitution,profession.Constitution,race.Constitution_Corection);
-            ViewBag.Inteligence = AtributValue(race.Intelligence,profession.Intelligence,race.Intelligence_Correction);
-            ViewBag.Charisma = AtributValue(race.Charisma,profession.Charisma,race.Charisma_Correction);
-            ViewBag.SilaMax = AtributValue(race.Strength_Max,profession.Strength_Max,race.Strength_Corection);
-            ViewBag.ObratnostMax = AtributValue(race.Agility_Max,profession.Agility_Max,race.Agility_Corection);
-            ViewBag.OdolnostMax = AtributValue(race.Constitution_Max,profession.Constitution_Max,race.Constitution_Corection);
-            ViewBag.InteligenceMax = AtributValue(race.Intelligence_Max,profession.Intelligence_Max,race.Intelligence_Correction);
-            ViewBag.CharismaMax = AtributValue(race.Charisma_Max,profession.Charisma_Max,race.Charisma_Correction);
-            return View();
+
+            return View(character);
         }
 
         // POST: Create
@@ -133,7 +133,7 @@ namespace DnDV4.Controllers
         // GET: Deník
         public async Task<IActionResult> Denik(int? id)
         {
-                if(id == null)
+            if(id == null)
             {
                 return NotFound();
             }
@@ -153,7 +153,7 @@ namespace DnDV4.Controllers
                         .Where(x => x.Atribut == atribut).ToList();
             }
             //--- testovani---
-            var xxx= context.CharacterWeapon.Include(x=>x.Weapon).Where(x => x.CharacterID == id).ToList();
+            var xxx = context.CharacterWeapon.Include(x => x.Weapon).Where(x => x.CharacterID == id).ToList();
             foreach(var item in xxx)
             {
                 string ccc = item.Weapon.NameWeapon;
@@ -162,17 +162,17 @@ namespace DnDV4.Controllers
                 int oc = item.DefenseNr;
                 int delka = item.Weapon.InitiativeWeapon;
             }
-                //-------
+            //-------
             ViewData["WeaponsList"] = context.CharacterWeapon.Where(x => x.CharacterID == id).ToList();
-			ViewData["WeaponsFilterClass"] = context.CharacterWeapon.Where(x => x.CharacterID == id).Select(x=>x.Weapon.ClassWeapon).OrderBy(x=>x).ToList().Distinct();
+            ViewData["WeaponsFilterClass"] = context.CharacterWeapon.Where(x => x.CharacterID == id).Select(x => x.Weapon.ClassWeapon).OrderBy(x => x).ToList().Distinct();
 
-			ViewData["Dengerousness_Strength"] = DangerousnessSkill(AtributEnum.strength);
+            ViewData["Dengerousness_Strength"] = DangerousnessSkill(AtributEnum.strength);
             ViewData["Dengerousness_Agility"] = DangerousnessSkill(AtributEnum.agility);
             ViewData["Dengerousness_Constitution"] = DangerousnessSkill(AtributEnum.constitution);
             ViewData["Dengerousness_Intelligence"] = DangerousnessSkill(AtributEnum.intelligence);
             ViewData["Dengerousness_Charisma"] = DangerousnessSkill(AtributEnum.charisma);
             ViewData["Dengerousness_Mobility"] = DangerousnessSkill(AtributEnum.mobility);
-            
+
 
             if(character == null)
             {
@@ -191,6 +191,7 @@ namespace DnDV4.Controllers
             }
 
             var character = await context.Character.FindAsync(id);
+            ViewData["RacePatch"] = context.Races.Where(x => x.Id == character.RaceId).Select(i => i.ImagePath).First();
             if(character == null)
             {
                 return NotFound();
@@ -201,19 +202,16 @@ namespace DnDV4.Controllers
         // POST: Characters/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,[Bind("Id,ProfessionId,RaceId,CharacterName,CharacterLevel,CharacterOrigin,Strength_current,Agility_current,Constitution_current,Intelligence_current,Charisma_current")] Character character)
+        public IActionResult Edit([Bind("Id,ProfessionId,RaceId,CharacterName,CharacterLevel,CharacterOrigin,Strength_current,Agility_current,Constitution_current,Intelligence_current,Charisma_current,Strength,Strength_Max,Agility,Agility_Max,Constitution,Constitution_Max,Intelligence,Intelligence_Max,Charisma,Charisma_Max,Mobility,Mobility_Max,Hp")] Character character)
         {
-            if(id != character.Id)
-            {
-                return NotFound();
-            }
+
 
             if(ModelState.IsValid)
             {
                 try
                 {
                     context.Update(character);
-                    await context.SaveChangesAsync();
+                    context.SaveChanges();
                 }
                 catch(DbUpdateConcurrencyException)
                 {
@@ -228,7 +226,6 @@ namespace DnDV4.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RaceId"] = new SelectList(context.Races,"Id","Id",character.RaceId);
 
             return View(character);
         }

@@ -9,18 +9,39 @@
 
     <div class="row characterCard">
         <div class=" col-12 border tabulka">
-			<h3>Jméno Postavy a informace</h3>
+            <div class="row">
+                <div class="col-4"><h3>@Html.DisplayFor(model => model.CharacterName)</h3></div>
+                <div class="col-4"><h5>@Html.DisplayFor(model => model.Race.RaceName)</h5></div>
+                <div class="col-4"><h5>@Html.DisplayFor(model => model.Profession.Name)</h5></div>
+            </div>
+            
+
+            <div class="row">
+				<div class="col-4 ">
+					<img src="@Url.Content(Model.Race.ImagePath)" class="img-fluid" />
+				</div>
+
+				<div class="col-8 ">
+                    <p class="text-start">@Html.DisplayNameFor(model => model.CharacterOrigin): @Html.DisplayFor(model => model.CharacterOrigin)</p>
+                    <div class="row">
+                        <div class="col-6">
+                            <h3 class="text-start">@Html.DisplayNameFor(model => model.Hp): @Html.DisplayFor(model => model.Hp)</h3>
+                        </div>
+                        <div class="col-6">
+                            <h3 class="text-start">@Html.DisplayNameFor(model => model.CharacterLevel): @Html.DisplayFor(model => model.CharacterLevel)</h3>
+                        </div>
+                    </div>
+				</div>
+
+            </div>
+           
         </div>
     </div>
 
-
-
-
     <div class="row characterCard">
-        <!--Atributy-->
+        <!--atributy-->
         <div class="col-sm-6 col-xl-4">
-            <h3>Atributy+skily</h3>
-
+        <br/>
             <!--Síla-->
             <div class="row ">
                 <div class="col-3 col-sm-5 col-md-3 col-xl-3">
@@ -55,14 +76,40 @@
 
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
 
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Strength_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Strength_bonus)</li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Strength_bonus)</li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if ((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus)>0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 +1+ @item.Dangerousness - Model.Strength_bonus ),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                 if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                 else if ((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}", (item.Dangerousness - Model.Strength_bonus), (6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness+6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness+6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";  
+                                            }
+                                            
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li> 
                                         </ul>
                                     </div>
                                 </li>
@@ -103,14 +150,40 @@
 
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
 
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Agility_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Agility_bonus) </li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Agility_bonus) </li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) > 0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 + 1 + @item.Dangerousness - Model.Strength_bonus),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                else if((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}",(item.Dangerousness - Model.Strength_bonus),(6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";
+                                            }
+
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -151,13 +224,40 @@
 
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
+
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Constitution_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Constitution_bonus) </li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Constitution_bonus) </li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) > 0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 + 1 + @item.Dangerousness - Model.Strength_bonus),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                else if((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}",(item.Dangerousness - Model.Strength_bonus),(6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";
+                                            }
+
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -197,13 +297,40 @@
                                         </button>
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
+
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Intelligence_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Intelligence_bonus) </li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Intelligence_bonus) </li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) > 0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 + 1 + @item.Dangerousness - Model.Strength_bonus),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                else if((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}",(item.Dangerousness - Model.Strength_bonus),(6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";
+                                            }
+
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -244,13 +371,40 @@
 
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
+
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Charisma_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Charisma_bonus) </li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Charisma_bonus) </li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) > 0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 + 1 + @item.Dangerousness - Model.Strength_bonus),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                else if((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}",(item.Dangerousness - Model.Strength_bonus),(6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";
+                                            }
+
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -267,9 +421,9 @@
                            asp-route-CharacterId="@Model?.Id"
                            asp-route-Atribut="@AtributEnum.mobility">
                             <div class="atribut-ramecek">
-                                <h6 class="atribut">Pohyblivost</h6>
-                                <p class="vlastnost">X</p>
-                                <p class="bonus">X</p>
+                                <h6 class="atribut">@Html.DisplayNameFor(model => model.Mobility)</h6>
+                                <p class="vlastnost">@Html.DisplayFor(model => model.Mobility)</p>
+                                <p class="bonus">@Html.DisplayFor(model => model.Mobility_bonus)</p>
                             </div>
                         </a>
                     </div>
@@ -291,13 +445,40 @@
 
                                         <ul class="dropdown-menu bg-secondary " style="font-size:normal">
                                             <li>
-                                                <h6>Minimální hody pro úspěch/neúspěch</h6>
+                                                <h6>Minimální hod 1k10</h6>
                                             </li>
+
                                             <li>Základní nebezpečnost: @item.Dangerousness</li>
                                             <li>Znalost :@item.Rank</li>
-                                            <li>Fatál: @(-6 + @item.Dangerousness - Model.Mobility_bonus) a méně</li>
-                                            <li>Úspěch: @(@item.Dangerousness - Model.Mobility_bonus) </li>
-                                            <li>T. úspěch:@(6 + @item.Dangerousness - Model.Mobility_bonus) </li>
+                                            @{
+                                                string fatal = "";
+                                                string neuspech = "";
+                                                string uspech = "";
+                                                string tuspech = "";
+
+                                                if((-6 + @item.Dangerousness - Model.Strength_bonus) >= 0)
+                                                    fatal = string.Format("Fatál: 0 až {0}",-6 + @item.Dangerousness - Model.Strength_bonus);
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) > 0)
+                                                    neuspech = string.Format("Neúspech: {0} až {1}",(-6 + 1 + @item.Dangerousness - Model.Strength_bonus),(item.Dangerousness - Model.Strength_bonus - 1));
+
+                                                if((@item.Dangerousness - Model.Strength_bonus) <= 0)
+                                                    uspech = "Automatický úspěch";
+                                                else if((@item.Dangerousness - Model.Strength_bonus) <= 10)
+                                                    uspech = string.Format("Úspech: {0} až {1}",(item.Dangerousness - Model.Strength_bonus),(6 - 1 + @item.Dangerousness - Model.Strength_bonus));
+                                                else uspech = "";
+
+                                                if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 0)
+                                                    tuspech = "Automatický totál";
+                                                else if((@item.Dangerousness + 6 - Model.Strength_bonus) <= 10)
+                                                    tuspech = string.Format("Totál: {0} +",(6 + @item.Dangerousness - Model.Strength_bonus));
+                                                else tuspech = "";
+                                            }
+
+                                            <li>@fatal</li>
+                                            <li>@neuspech</li>
+                                            <li>@uspech</li>
+                                            <li>@tuspech</li>
                                         </ul>
                                     </div>
                                 </li>
@@ -311,8 +492,7 @@
 		<!--zbrane-->
         <div class="col-sm-6 col-xl-4 border ">
             <a class="text-decoration-none btn btn-dark" asp-controller="CharacterWeapons" asp-action="Index"
-                           asp-route-CharacterId="@Model?.Id">Zbraň</a>
-            <h3>Zbraně</h3>
+                           asp-route-CharacterId="@Model?.Id">Zbraně</a>
             @{
                 foreach(var weaponClass in ViewBag.WeaponsFilterClass)
                 {
@@ -324,7 +504,7 @@
                             <div>
                                 <table class="table">
                                     <thead>
-                                        Jednoruční zbraně
+										<h4>Jednoruční zbraně</h4>
                                         <tr>
                                             <th>Jmeno</th>
                                             <th>Úč</th>
@@ -360,7 +540,7 @@
                             <div>
                                 <table class="table">
                                     <thead>
-                                        Obouruční zbraně
+										<h4>Obouruční zbraně</h4>
                                         <tr>
                                             <th>Jmeno</th>
                                             <th>Úč</th>
@@ -390,14 +570,14 @@
                             </div>
                         }
                         break;
-                        //střelné vrhcí
+                        //střelné/vrhcí
                         case WeaponClassEnum.firearm:
                         case WeaponClassEnum.throwing:
                         {
                             <div>
                                 <table class="table">
                                     <thead>
-                                        Střelné a vrhací zbraně
+										<h4>Střelné a vrhací zbraně</h4>
                                         <tr>
                                             <th>Název</th>
                                             <th>Úč</th>
@@ -416,9 +596,9 @@
                                                         <td>@item.Weapon.NameWeapon</td>
                                                         <td>@item.AtackNr</td>
                                                         <td>@item.DemageNr</td>
-                                                        <td>@item.Weapon.MinGunshot</td>
-                                                        <td>@item.Weapon.MiddleGunshot</td>
-                                                        <td>@item.Weapon.MaxGunshot</td>
+                                                        <td class="text-bg-danger">@item.Weapon.MinGunshot</td>
+                                                        <td class="text-bg-danger">@item.Weapon.MiddleGunshot</td>
+                                                        <td class="text-bg-danger">@item.Weapon.MaxGunshot</td>
                                                     </tr>
                                                 }
                                             }
@@ -434,7 +614,7 @@
                             <div>
                                 <table class="table">
                                     <thead>
-                                        Boj beze zbraně
+										<h4>Boj beze zbraně</h4>
                                         <tr>
                                             <th>Jmeno</th>
                                             <th>Úč</th>
@@ -472,10 +652,8 @@
                 }
             }         
         </div>
-   
-        
 
-
+        <!--Kouzla - zatím bez hodnot-->
         <div class="col-sm-12 col-xl-4 border ">
             <h3>Kouzla</h3>
 

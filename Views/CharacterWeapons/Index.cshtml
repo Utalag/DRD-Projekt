@@ -15,7 +15,7 @@
                 @Html.DisplayNameFor(model => model.Weapon)
             </th>
             <th>
-                Uč+ut+Oč
+                Uč/ut/Oč
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Weapon.ClassWeapon)
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Weapon.NameWeapon)
             </td>
             <td>
-                    @Html.DisplayFor(modelItem => item.AtackNr)+@Html.DisplayFor(modelItem => item.DemageNr)+@Html.DisplayFor(modelItem => item.DefenseNr)
+                    @Html.DisplayFor(modelItem => item.AtackNr)/@Html.DisplayFor(modelItem => item.DemageNr)/@Html.DisplayFor(modelItem => item.DefenseNr)
             </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Weapon.ClassWeapon)
