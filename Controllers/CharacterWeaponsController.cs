@@ -71,8 +71,8 @@ namespace DnDV4.Controllers
                 return NotFound();
             }
 
-            
-           
+
+            ViewData["CharacterId"] = CharacterId;
             ViewData["WeaponId"] = new SelectList(_context.Weapon, "Id", "NameWeapon");
             return View();
         }

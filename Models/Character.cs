@@ -87,24 +87,20 @@ namespace DnDV4.Models
         public int Charisma_Skill_Points_current     { get; set; }
         //životy na 1. urovni
         [Display(Name ="Životy")]
-        public int Hp { get; set; }                 // !!!doplnit logiku
+        public int Hp { get; set; }          
 
 
+        public int Strength_DiceRoll { get { return DiceRoll(Strength,Strength_Max); } set { } }
+        public int Dexterity_DiceRoll { get { return DiceRoll(Agility,Agility_Max); } set { } }
+        public int Constitution_DiceRoll { get { return DiceRoll(Constitution,Constitution_Max); } set { } }
+        public int Intelligence_DiceRoll { get { return DiceRoll(Intelligence,Intelligence_Max); } set { } }
+        public int Charisma_DiceRoll { get { return DiceRoll(Charisma,Charisma_Max); } set { } }
+        protected int DiceRoll(int min,int max)
+        {
+            int roll = (max - min) / 5;
 
-
-
-
-
-
-
-
-
-        public int Strength_DiceRoll { get; set; }
-        public int Dexterity_DiceRoll { get; set; }
-        public int Constitution_DiceRoll { get; set; }
-        public int Intelligence_DiceRoll { get; set; }
-        public int Charisma_DiceRoll { get; set; }
-
+            return roll;
+        }
 
         //bonusy k atributem
         [NotMapped]

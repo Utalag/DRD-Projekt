@@ -45,6 +45,8 @@
     
 }
 
+
+
 .atribut {
     text-align: center;
     margin: 5px 0px 5px 0;
@@ -68,12 +70,14 @@
     margin: -10px 0px 00px 0px;
 }
 
-
-
+.atribut-ramecek:hover {
+    background-color: black;
+    color: antiquewhite;
+}
 
 
 .characterCard {
-    background-color: rgba(255, 255, 220, 0.5);
+    background-color: rgba(255, 255, 220, 0.65);
     border: 3px black solid;
     border-radius: 5px;
 }

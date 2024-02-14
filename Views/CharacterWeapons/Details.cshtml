@@ -1,30 +1,144 @@
 ﻿@model DnDV4.Models.CharacterWeapon
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detail";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>CharacterWeapon</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weapon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weapon.NameWeapon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Character)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Character.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="row">
+		<div class="col-3">
+
+		</div>
+
+		<div class="col-6 characterCard">
+			<dl class="row">
+				<dt class="col-sm-4">
+					@Html.DisplayNameFor(model => model.Weapon)
+				</dt>
+				<dd class="col-sm-8">
+					@Html.DisplayFor(model => model.Weapon.NameWeapon)
+				</dd>
+
+				<dt class="col-sm-4">
+					@Html.DisplayNameFor(model => model.Weapon.SZ)
+				</dt>
+				<dd class="col-sm-8">
+					@Html.DisplayFor(model => model.Weapon.SZ)
+				</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.UT)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.UT)
+			</dd>
+
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.OZ)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.OZ)
+			</dd>
+
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.LengthWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.LengthWeapon)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.InitiativeWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.InitiativeWeapon)
+			</dd>
+			<hr />
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.MinGunshot)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.MinGunshot)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.MiddleGunshot)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.MiddleGunshot)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.MaxGunshot)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.MaxGunshot)
+			</dd>
+			<hr />
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.SizeWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.SizeWeapon)
+			</dd>
+
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.ClassWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.ClassWeapon)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.TypeWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.TypeWeapon)
+			</dd>
+			<hr />
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.Price)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.Price)
+			</dd>
+			
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.WeightWeapon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.WeightWeapon)
+			</dd>
+			<hr />
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.Manufacturer)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.Manufacturer)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.ManufacturerBonus)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.ManufacturerBonus)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.Metal)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.Metal)
+			</dd>
+			<dt class="col-sm-4">
+				@Html.DisplayNameFor(model => model.Weapon.Demon)
+			</dt>
+			<dd class="col-sm-8">
+				@Html.DisplayFor(model => model.Weapon.Demon)
+			</dd>
+
+			</dl>
+
+		<div class="btn-group-sm text-center">
+			<a class="btn btn-dark btn-outline-light fw-bolder" asp-action="Edit" asp-route-id="@Model?.Id">Uprav</a> |
+			<a class="btn btn-dark btn-outline-light fw-bolder" asp-action="Index" asp-route-CharacterId="@Model.CharacterID">Zpět</a>
+		</div>
+		</div>
+
+    </div>
+   
+

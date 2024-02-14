@@ -1,33 +1,26 @@
 ﻿@model DnDV4.Models.CharacterWeapon
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Zahodit zbraň";
 }
 
-<h1>Delete</h1>
+<div class="row">
+	<div class="col-3"></div>
+	<div class=" col-6 characterCard">
+		<h3 class="text-center">Chceš se opravdu zbavit zbraně ?</h3>
+		<hr />
+		<h3 class="text-center fw-bolder ">@Html.DisplayFor(model => model.Weapon.NameWeapon)</h3>
+		<hr />
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CharacterWeapon</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Weapon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Weapon.NameWeapon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Character)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Character.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+		<form asp-action="Delete">
+			<input type="hidden" asp-for="Id" />
+
+			<div class="btn-group container ">
+				<input type="submit" value="Delete" class="btn btn-danger " />
+				<a asp-action="Index" asp-route-CharacterId="@Model.CharacterID" class="btn btn-dark ">Zpět</a>
+			</div>
+
+		</form>
+	</div>
 </div>
+

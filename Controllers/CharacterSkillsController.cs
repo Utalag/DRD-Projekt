@@ -176,7 +176,8 @@ namespace DnDV4.Controllers
         // GET: Index
         public async Task<IActionResult> Index(AtributEnum atribut,int? CharacterId)                                          
         {
-            var skillContext = _context.Skill.Include(c => c.SkillTable)
+
+			var skillContext = _context.Skill.Include(c => c.SkillTable)
                 .Where(x => x.Atribut == atribut); // vypíše skilly podle předaného atributu
 
             ViewData["Atribut"] = atribut;
@@ -190,10 +191,27 @@ namespace DnDV4.Controllers
         // GET: Create
         public IActionResult Create(int? CharacterId,int? SkillId,int? SkillPoint,AtributEnum atribut) // <- předané parametry z IndexSkilll
         {
-            var valueSkill = _context.Skill.Find(SkillId);
+
+                if(SkillId == null)
+                {
+                Console.WriteLine("SkillId je null");
+                return NotFound(); }
+				
+
+			if(CharacterId == null)
+			{
+				Console.WriteLine("CharacterId je null");
+				return NotFound();
+			}
+
+			if(SkillPoint == null)
+			{
+				Console.WriteLine("SkillPoint je null");
+				return NotFound();
+			}
 
 
-            
+			var valueSkill = _context.Skill.Find(SkillId);
             ViewData["ValuePoints"] = ValuePointsGet(valueSkill,SkillPoint)[0];
             ViewData["SkillPoints"] = SkillPoint; // předá ve View data do "characterSkill.SkillPoint_curentValue"
             ViewData["CaracterId"] = CharacterId;

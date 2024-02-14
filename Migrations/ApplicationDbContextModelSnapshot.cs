@@ -167,7 +167,7 @@ namespace DnDV4.Migrations
 
                     b.HasIndex("RaceId");
 
-                    b.ToTable("Character");
+                    b.ToTable("Character", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.CharacterSkill", b =>
@@ -202,7 +202,7 @@ namespace DnDV4.Migrations
 
                     b.HasIndex("SkillId");
 
-                    b.ToTable("CharacterSkill");
+                    b.ToTable("CharacterSkill", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.CharacterWeapon", b =>
@@ -234,7 +234,7 @@ namespace DnDV4.Migrations
 
                     b.HasIndex("WeaponId");
 
-                    b.ToTable("CharacterWeapon");
+                    b.ToTable("CharacterWeapon", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.Profession", b =>
@@ -309,7 +309,7 @@ namespace DnDV4.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Profession");
+                    b.ToTable("Profession", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.Race", b =>
@@ -404,7 +404,7 @@ namespace DnDV4.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Races");
+                    b.ToTable("Races", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.Skill", b =>
@@ -451,7 +451,7 @@ namespace DnDV4.Migrations
 
                     b.HasIndex("SkillTableId");
 
-                    b.ToTable("Skill");
+                    b.ToTable("Skill", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.SkillTable", b =>
@@ -483,7 +483,7 @@ namespace DnDV4.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SkillTable");
+                    b.ToTable("SkillTable", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.SubProfession", b =>
@@ -509,7 +509,7 @@ namespace DnDV4.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubProfession");
+                    b.ToTable("SubProfession", (string)null);
                 });
 
             modelBuilder.Entity("DnDV4.Models.Weapon", b =>
@@ -589,7 +589,7 @@ namespace DnDV4.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Weapon");
+                    b.ToTable("Weapon", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
