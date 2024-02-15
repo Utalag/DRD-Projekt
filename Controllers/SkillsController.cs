@@ -54,7 +54,7 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nazev,PouzityAtribut,Obtiznost,Overovani,TotalniUspech,Uspech,Neuspech,FatalniNeuspech,Poznamka")] Skill skill)
+        public async Task<IActionResult> Create([Bind("Id,Name,Atribut,Seriousness,Verification,TotalSuccess,Success,Failure,FatalFailure,Description")] Skill skill)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace DnDV4.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nazev,PouzityAtribut,Obtiznost,Overovani,TotalniUspech,Uspech,Neuspech,FatalniNeuspech,Poznamka")] Skill skill)
+        public async Task<IActionResult> Edit(int id,[Bind("Id,Name,Atribut,Seriousness,Verification,TotalSuccess,Success,Failure,FatalFailure,Description")] Skill skill)
         {
             if (id != skill.Id)
             {

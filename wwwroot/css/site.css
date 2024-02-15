@@ -46,6 +46,9 @@
 }
 
 
+.characterPortrait:hover {
+    border-radius:500px;
+}
 
 .atribut {
     text-align: center;

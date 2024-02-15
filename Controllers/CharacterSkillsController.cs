@@ -30,7 +30,7 @@ namespace DnDV4.Controllers
 
             // výchozí hodnota profibodů dané vlastnosti
             int baseSkillPoint = 0;
-            // vpíše i vybrané postavy body pro vybranou vlastnost
+            // vypíše u vybrané postavy body pro vybranou vlastnost
             switch(atribut)
             {
                 case AtributEnum.strength:
@@ -49,8 +49,8 @@ namespace DnDV4.Controllers
                 baseSkillPoint = serchCharacterValues.Select(x => x.Charisma_Skill_Points).Sum();
                 break;
                 case AtributEnum.mobility:
-                //baseSkillPoint = body.Select(x => x.Mobility_Skill_Points).Sum();
-                break;
+				//baseSkillPoint = serchCharacterValues.Select(x => x.Mobility_Skill_Points).Sum();
+				break;
                 default:
                 baseSkillPoint = 0;
                 break;
@@ -58,10 +58,16 @@ namespace DnDV4.Controllers
             return baseSkillPoint;
         }
         //metoda pro filtrovýní hodnot ze skillTable podle obtížnosti skillu
-        List<System.Collections.ICollection> ValuePointsGet(Skill? currentSkill,int? maxPoint)
+        List<System.Collections.ICollection> ValuePointsGet(Skill currentSkill,int maxPoint,int currentPoint)
         {
             //currentSkill  = konkrétní skill(dovednost)
             //maxPoint      = maximum použitelných profibodů pro omezení maxiálního stupně dovednosti
+
+            int points;
+            if(maxPoint <= currentPoint)
+                points = currentPoint;
+            else
+            { points = maxPoint; }
 
             List<System.Collections.ICollection> skillValue = new List<System.Collections.ICollection>();
 
@@ -70,7 +76,7 @@ namespace DnDV4.Controllers
                 case SeriousnessEnum.easy:
                 {
                     var value = _context.SkillTable
-                        .Where(x => x.Easy < maxPoint && x.Easy > 0)
+                        .Where(x => x.Easy < points && x.Easy > 0)
                         .Select(x => new { Value = x.Easy,IdTable = x.Id,EnumRank = x.Rank }).ToList();
                     skillValue.Add(value);
 
@@ -79,7 +85,7 @@ namespace DnDV4.Controllers
                 case SeriousnessEnum.middle:
                 {
                     var value = _context.SkillTable
-                        .Where(x => x.Medium < maxPoint && x.Easy > 0)
+                        .Where(x => x.Medium < points && x.Medium > 0)
                         .Select(x => new { Value = x.Medium,IdTable = x.Id,EnumRank = x.Rank }).ToList();
                     skillValue.Add(value);
                     break;
@@ -87,7 +93,7 @@ namespace DnDV4.Controllers
                 case SeriousnessEnum.hard:
                 {
                     var value = _context.SkillTable
-                        .Where(x => x.Hard < maxPoint && x.Easy > 0)
+                        .Where(x => x.Hard < points && x.Hard > 0)
                         .Select(x => new { Value = x.Hard,IdTable = x.Id,EnumRank = x.Rank }).ToList();
                     skillValue.Add(value);
                     break;
@@ -95,7 +101,7 @@ namespace DnDV4.Controllers
                 case SeriousnessEnum.veryHard:
                 {
                     var value = _context.SkillTable
-                        .Where(x => x.VeryHard < maxPoint && x.Easy > 0)
+                        .Where(x => x.VeryHard < points && x.VeryHard > 0)
                         .Select(x => new { Value = x.VeryHard,IdTable = x.Id,EnumRank = x.Rank }).ToList();
                     skillValue.Add(value);
                     break;
@@ -189,7 +195,7 @@ namespace DnDV4.Controllers
         }
 
         // GET: Create
-        public IActionResult Create(int? CharacterId,int? SkillId,int? SkillPoint,AtributEnum atribut) // <- předané parametry z IndexSkilll
+        public IActionResult Create(int? CharacterId,int? SkillId,int SkillPoint,AtributEnum atribut) 
         {
 
                 if(SkillId == null)
@@ -212,7 +218,7 @@ namespace DnDV4.Controllers
 
 
 			var valueSkill = _context.Skill.Find(SkillId);
-            ViewData["ValuePoints"] = ValuePointsGet(valueSkill,SkillPoint)[0];
+            ViewData["ValuePoints"] = ValuePointsGet(valueSkill,SkillPoint,0)[0];
             ViewData["SkillPoints"] = SkillPoint; // předá ve View data do "characterSkill.SkillPoint_curentValue"
             ViewData["CaracterId"] = CharacterId;
             ViewData["Atribut"] = atribut;
@@ -244,34 +250,27 @@ namespace DnDV4.Controllers
         }
 
 
-        // GET: CharacterSkills/Edit/5
-        public async Task<IActionResult> Edit( int? CharacterId,int? SkillId)
+		// GET: CharacterSkills/Edit/5
+		public async Task<IActionResult> Edit( int CharacterId,int SkillId)
         {
-            
-            // v databázi characterSkill vyhledá právě toto Id
-            var ID = await _context.CharacterSkill
-                .Where(x => x.CharacterId == CharacterId)
-                .Where(x => x.SkillId == SkillId)
-                .FirstAsync();
+			var characterSkill = await _context.CharacterSkill
+				.Where(x => x.CharacterId == CharacterId)
+				.Where(x => x.SkillId == SkillId)
+                .Include(x=>x.Skill)
+				.FirstAsync();
 
+			//              maximální počet bodů u dovednosti - součet přiřazených bodů   
+			int freePoints = MaxSkillPoint(characterSkill.Atribut,CharacterId) - ListPoints(characterSkill.Atribut,CharacterId).Sum();
 
-            var valueSkill = await _context.Skill.Where(x => x.Id == ID.SkillId).FirstAsync();
+			
 
-            var characterSkill = await _context.CharacterSkill.FindAsync(ID.Id);
-            // najít maximální hodnotu profibodů u dovednosti
+			ViewData["ValuePoints"] = ValuePointsGet(characterSkill.Skill,freePoints,characterSkill.SkillPoint_curentValue+freePoints)[0];
+            //hodnota dané dovednosti
+			ViewData["SkillPoint_current"] = characterSkill.SkillPoint_curentValue;
 
-           
+			return View(characterSkill);
 
-            int fullPoints= MaxSkillPoint(characterSkill.Atribut,CharacterId.Value)- ListPoints(characterSkill.Atribut,CharacterId).Sum();
-
-
-            ViewData["ValuePoints"] = ValuePointsGet(valueSkill,fullPoints)[0];
-            ViewData["SkillPoint_current"] = ID.SkillPoint_curentValue;
-      
- 
-            return View(characterSkill);
-            //return View();
-        }
+		}
 
 
         // POST: Edit

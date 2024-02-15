@@ -31,7 +31,7 @@
 
                     foreach(var item in @ViewBag.ValuePoints)
                     {
-                        @if(item.Value - ViewBag.SkillPoint_current<0)
+                        if(item.Value - ViewBag.SkillPoint_current<0)
                         {
                             <div class="col alert alert-danger">
                                 <div class="card">
