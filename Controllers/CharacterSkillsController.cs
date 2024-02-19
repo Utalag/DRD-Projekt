@@ -1,5 +1,5 @@
-﻿using DnDV4.Data;
-using DnDV4.Models;
+﻿using DRD.Data;
+using DRD.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Drawing;
 
-namespace DnDV4.Controllers
+namespace DRD.Controllers
 {
     public class CharacterSkillsController : Controller
     {

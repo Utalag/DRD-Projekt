@@ -1,4 +1,4 @@
-﻿using DnDV4.Migrations;
+﻿using DRD.Migrations;
 using Microsoft.AspNetCore.Cors;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 
-namespace DnDV4.Models
+namespace DRD.Models
 {
     public class Weapon
     {

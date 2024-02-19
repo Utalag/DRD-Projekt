@@ -1,8 +1,8 @@
-﻿using DnDV4.Models;
+﻿using DRD.Models;
 using System.Drawing;
 using System.Security.Cryptography;
 
-namespace DnDV4.Data
+namespace DRD.Data
 {
     public sealed class DbInitializer
     {

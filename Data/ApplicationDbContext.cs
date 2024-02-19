@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-using DnDV4.Models;
-namespace DnDV4.Data
+using DRD.Models;
+namespace DRD.Data
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext(options)
     {
@@ -18,9 +18,9 @@ namespace DnDV4.Data
         {
             base.OnModelCreating(builder);
         }
-        public DbSet<DnDV4.Models.CharacterSkill> CharacterSkill { get; set; } = default!;
-        public DbSet<DnDV4.Models.Weapon> Weapon { get; set; } = default!;
-        public DbSet<DnDV4.Models.CharacterWeapon> CharacterWeapon { get; set; } = default!;
+        public DbSet<DRD.Models.CharacterSkill> CharacterSkill { get; set; } = default!;
+        public DbSet<DRD.Models.Weapon> Weapon { get; set; } = default!;
+        public DbSet<DRD.Models.CharacterWeapon> CharacterWeapon { get; set; } = default!;
 
         // logovani SQL dotazu
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

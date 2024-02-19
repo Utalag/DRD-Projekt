@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DnDV4.Models
+namespace DRD.Models
 {
 
     interface IAtribut

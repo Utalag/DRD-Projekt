@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DnDV4.Migrations
+namespace DRD.Migrations
 {
     /// <inheritdoc />
     public partial class Update_CharacterSkill_Repeat : Migration

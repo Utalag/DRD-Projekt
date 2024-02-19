@@ -1,8 +1,8 @@
-using DnDV4.Models;
+using DRD.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace DnDV4.Controllers
+namespace DRD.Controllers
 {
     public class HomeController : Controller
     {

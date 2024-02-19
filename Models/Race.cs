@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 
 
-namespace DnDV4.Models
+namespace DRD.Models
 {
     //  RACE => Character => Deník
 

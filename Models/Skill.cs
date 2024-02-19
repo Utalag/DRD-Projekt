@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
-namespace DnDV4.Models
+namespace DRD.Models
 {
 
     public class Skill
