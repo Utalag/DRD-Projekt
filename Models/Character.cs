@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DRD.Models
+namespace DnDV4.Models
 {
     // Profession                   => CHARACTER    => Deník
     //               Race           => CHARACTER    => Deník

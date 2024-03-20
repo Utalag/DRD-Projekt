@@ -1,9 +1,9 @@
-﻿using DRD.Data;
-using DRD.Models;
+﻿using DnDV4.Data;
+using DnDV4.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace DRD.Controllers
+namespace DnDV4.Controllers
 {
     public class CharactersController(ApplicationDbContext context) : Controller
     {

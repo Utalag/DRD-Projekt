@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DRD.Models
+namespace DnDV4.Models
 {
     public enum RangeSkillEnum
     {

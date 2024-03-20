@@ -1,4 +1,4 @@
-namespace DRD.Models
+namespace DnDV4.Models
 {
     public class ErrorViewModel
     {

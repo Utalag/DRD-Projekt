@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DRD.Migrations
+namespace DnDV4.Migrations
 {
     /// <inheritdoc />
     public partial class Rename_Range_CharacterSkill : Migration

@@ -1,8 +1,8 @@
-using DRD.Data;
+using DnDV4.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace DRD
+namespace DnDV4
 {
     public class Program
     {

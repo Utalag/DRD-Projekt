@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\DnDV4.props" />
-</Project>

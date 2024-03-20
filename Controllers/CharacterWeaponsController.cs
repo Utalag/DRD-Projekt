@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using DRD.Data;
-using DRD.Models;
+using DnDV4.Data;
+using DnDV4.Models;
 using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DRD.Controllers
+namespace DnDV4.Controllers
 {
     public class CharacterWeaponsController : Controller
     {

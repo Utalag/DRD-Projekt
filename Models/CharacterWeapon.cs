@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DRD.Models
+namespace DnDV4.Models
 {
     // vazební tabulka
     public class CharacterWeapon()
